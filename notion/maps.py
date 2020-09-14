@@ -19,7 +19,7 @@ class mapper(property):
 def field_map(path, python_to_api=lambda x: x, api_to_python=lambda x: x):
     """
     Returns a property that maps a Block attribute onto a field in the API data structures.
-    
+
     - `path` can either be a top-level field-name, a list that specifies the key names to traverse,
       or a dot-delimited string representing the same traversal.
 
@@ -35,8 +35,12 @@ def field_map(path, python_to_api=lambda x: x, api_to_python=lambda x: x):
 
     def fget(self):
         kwargs = {}
-        if "client" in signature(api_to_python).parameters:
+        if (
+            "client" in signature(api_to_python).parameters
+            and "id" in signature(api_to_python).parameters
+        ):
             kwargs["client"] = self._client
+            kwargs["id"] = self.id
         return api_to_python(self.get(path), **kwargs)
 
     def fset(self, value):
@@ -74,13 +78,17 @@ def property_map(
             x = markdown_to_notion(x)
         return x
 
-    def api2py(x, client=None):
+    def api2py(x, client=None, id=""):
         x = x or [[""]]
         if markdown:
             x = notion_to_markdown(x)
         kwargs = {}
-        if "client" in signature(api_to_python).parameters:
+        if (
+            "client" in signature(api_to_python).parameters
+            and "id" in signature(api_to_python).parameters
+        ):
             kwargs["client"] = client
+            kwargs["id"] = id
         return api_to_python(x, **kwargs)
 
     return field_map(["properties", name], python_to_api=py2api, api_to_python=api2py)
