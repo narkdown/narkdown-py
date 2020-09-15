@@ -51,7 +51,14 @@ class NotionClient(object):
     for internal use -- the main one you'll likely want to use is `get_block`.
     """
 
-    def __init__(self, token_v2, monitor=False, start_monitoring=False, enable_caching=False, cache_key=None):
+    def __init__(
+        self,
+        token_v2,
+        monitor=False,
+        start_monitoring=False,
+        enable_caching=False,
+        cache_key=None,
+    ):
         self.session = create_session()
         self.session.cookies = cookiejar_from_dict({"token_v2": token_v2})
         if enable_caching:
