@@ -34,6 +34,78 @@ class Notion2Github:
             )
         )
 
+    def get_notion_pages_from_database(
+        self,
+        url,
+        category_column_name="",
+        status_column_name="",
+        current_status="",
+        next_status="",
+        filters={},
+    ):
+
+        collection = self.client.get_block(url).collection
+
+        if status_column_name:
+            try:
+                status_options = list(
+                    map(
+                        lambda i: i["value"],
+                        collection.get_schema_property(status_column_name)["options"],
+                    )
+                )
+            except AttributeError:
+                print('Status column should be "Select" property.')
+
+        if current_status and current_status not in status_options:
+            print('"{0}" is not in status list.'.format(current_status))
+            return
+        if next_status and next_status not in status_options:
+            print('"{0}" is not in status list.'.format(next_status))
+            return
+
+        pages = collection.get_rows()
+
+        if current_status:
+            pages = list(
+                filter(
+                    lambda page: page.get_property(status_column_name)
+                    == current_status,
+                    pages,
+                )
+            )
+
+        for key, value in filters.items():
+            pages = list(filter(lambda page: page.get_property(key) == value, pages))
+
+        for page in pages:
+            path_set = (
+                [
+                    self.docs_directory,
+                    page.get_property(category_column_name),
+                    page.title,
+                ]
+                if category_column_name and page.get_property(category_column_name)
+                else [self.docs_directory, page.title]
+            )
+
+            self.path = os.path.join(*path_set)
+            create_directory(os.path.join(self.path, "images"))
+
+            post = "# " + page.title + "\n\n"
+            post = post + self.parse_notion_contents(page.children, "")
+
+            write_post(post, self.path)
+
+            if next_status:
+                page.set_property(status_column_name, next_status)
+
+            print(
+                '✅ Successfully exported page To "{0}" From "{1}"'.format(
+                    self.path, page.get_browseable_url()
+                )
+            )
+
     def parse_notion_contents(self, blocks, offset):
         contents = ""
 
