@@ -32,15 +32,19 @@ This is plain text. `Support`
 
 _This text is italicized._ `Support`
 
-`this text is inline code.` `Support`
-
 ~~This was mistaken text.~~ `Support`
 
 **This text is** **_extremely_** **important.** `Support`
 
 **_All this text is important._** `Support`
 
+~~**_This text is mixed_**~~ `Support`
+
+`this text is inline code.` `Support`
+
 [this text is link.](https://github.com/younho9/notion2github) `Support`
+
+This text has underline. `Not Support`
 
 This text has color. `Not Support`
 
