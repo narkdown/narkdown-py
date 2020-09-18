@@ -6,7 +6,7 @@
 | ----------------- | ---------------------------------------------- | --------------- | ------------------------------------------- | --------------------------- | ---------------------- |
 | `** ** or __ __`  | **This is bold text**                          | ['Support']     | **This is bold text**                       | `Cmd/Ctrl` + `B`            | Bold                   |
 | `* * or _ _`      | _This text is italicized_                      | ['Support']     | _This text is italicized_                   | `Cmd/Ctrl` + `I`            | Italic                 |
-| ``                | `console.log('hello');`                        | ['Support']     | `console.log('hello');`                     | `Cmd/Ctrl` + `E`            | Inline Code            |
+| ` `               | `console.log('hello');`                        | ['Support']     | `console.log('hello');`                     | `Cmd/Ctrl` + `E`            | Inline Code            |
 | `~~ ~~`           | ~~This was mistaken text~~                     | ['Support']     | ~~This was mistaken text~~                  | `Cmd/Ctrl` + `Shfit` + `S`  | Strikethrough          |
 | `** ** and _ _`   | **This text is** **_extremely_** **important** | ['Support']     | **This text is _extremely_ important**      |                             | Bold and nested italic |
 | `**_ _**`         | **_All this text is important_**               | ['Support']     | **_All this text is important_**            |                             | All bold and italic    |

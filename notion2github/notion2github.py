@@ -146,7 +146,7 @@ class Notion2Github:
             elif block.type == "to_do":
                 contents += "- [ ] " + block.title
             elif block.type == "toggle":
-                contents += "<details><summary>" + block.title + "</summary>"
+                contents += "- <details><summary>" + block.title + "</summary>"
             elif block.type == "text":
                 contents += block.title
             elif block.type == "collection_view":
@@ -158,8 +158,10 @@ class Notion2Github:
                 if block.type == "page":
                     continue
                 elif block.type == "toggle":
-                    contents += self.parse_notion_contents(block.children, offset)
-                    contents += offset + "</details>\n\n"
+                    contents += self.parse_notion_contents(
+                        block.children, offset + "\t"
+                    )
+                    contents += offset + "  </details>\n\n"
                 else:
                     contents += self.parse_notion_contents(
                         block.children, offset + "\t"
