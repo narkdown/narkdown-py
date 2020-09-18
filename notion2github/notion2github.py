@@ -109,7 +109,7 @@ class Notion2Github:
     def parse_notion_contents(self, blocks, offset):
         contents = ""
 
-        for block in blocks:
+        for index, block in enumerate(blocks):
             contents += offset
             if block.type == "header":
                 contents += "## " + block.title
@@ -126,6 +126,8 @@ class Notion2Github:
             elif block.type == "quote":
                 contents += "> " + block.title
             elif block.type == "divider":
+                if blocks[index - 1].type == "header":
+                    continue
                 contents += "---"
             elif block.type == "bookmark":
                 contents += "[" + block.title + "](" + block.link + ")"
