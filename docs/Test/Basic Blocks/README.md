@@ -114,28 +114,26 @@ This text has background color. `Not Support`
 
 ## Toggle list `Support`
 
-> ⚠️ [Notion2Github](https://github.com/younho9/notion2github) doesn't support nested block.
+> 🎉 [Notion2Github](https://github.com/younho9/notion2github) support nested block.
 
-<details><summary>Toggle item 1</summary>
+- <details><summary>Toggle item 1</summary>
 
-<details><summary>Toggle item 1-1</summary>
+  - <details><summary>Toggle item 1-1</summary>
 
-<details><summary>Toggle item 1-1-1</summary>
+    - <details><summary>Toggle item 1-1-1</summary>
 
-<details><summary>Toggle item 1-1-2</summary>
+    - <details><summary>Toggle item 1-1-2</summary>
 
-</details>
+    </details>
 
-<details><summary>Toggle item 1-2</summary>
+  - <details><summary>Toggle item 1-2</summary>
 
-</details>
+  </details>
 
-</details>
+- <details><summary>Toggle item 2</summary>
 
-<details><summary>Toggle item 2</summary>
+  - <details><summary>Toggle item 2-1</summary>
 
-<details><summary>Toggle item 2-1</summary>
+  - <details><summary>Toggle item 2-2</summary>
 
-<details><summary>Toggle item 2-2</summary>
-
-</details>
+  </details>
