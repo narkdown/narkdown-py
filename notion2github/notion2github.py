@@ -139,7 +139,19 @@ class Notion2Github:
             elif block.type == "bookmark":
                 contents += "[" + block.title + "](" + block.link + ")"
             elif block.type == "page":
-                contents += "[" + block.title + "](" + block.get_browseable_url() + ")"
+                if self.client.get_block(block.id).parent == block.parent:
+                    self.get_notion_page(block.get_browseable_url(), path=path)
+                    contents += (
+                        "["
+                        + block.title
+                        + "]("
+                        + block.title.replace(" ", "%20")
+                        + "/README.md)"
+                    )
+                else:
+                    contents += (
+                        "[" + block.title + "](" + block.get_browseable_url() + ")"
+                    )
             elif block.type == "image":
                 image_path = self.get_image_path(path, block.source)
                 contents += (
