@@ -1,7 +1,6 @@
 import os
 import sys
 import requests
-from .config import token, page_url, database_url
 from .constants import *
 from .notion.client import NotionClient
 
