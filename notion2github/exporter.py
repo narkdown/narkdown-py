@@ -6,7 +6,7 @@ from .constants import *
 from .notion.client import NotionClient
 
 
-class Notion2Github:
+class NotionExporter:
     def __init__(
         self,
         token,
