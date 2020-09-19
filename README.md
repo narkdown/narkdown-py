@@ -141,7 +141,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 ## Supported Blocks
 
-[View supported blocks by type](/acc3dfd0339e4cacb5baae8673fddfad?v=83b3d2a66f634940987d1142e51da175)
+[View supported blocks by type](https://bit.ly/32PzfpT)
 
 | Block Type           | Supported         | Notes                                                                                           |
 | -------------------- | ----------------- | ----------------------------------------------------------------------------------------------- |
