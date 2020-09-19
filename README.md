@@ -1,1 +1,1 @@
-# notion2github
+# Notion2Github
