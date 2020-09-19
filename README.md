@@ -1,6 +1,6 @@
 # Notion2Github
 
-![image-0](images/image-0.png)
+![image-0](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-0.png)
 
 A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.github.com/gfm/) editor.
 
@@ -43,7 +43,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 1. Get `token_v2` cookie from a logged-in browser session on Notion.so.
 
-   ![image-1](images/image-1.png)
+   ![image-1](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-1.png)
 
 1. Add [`config.py`](https://github.com/younho9/notion2github/blob/main/config.py.example) in root directory
 
@@ -94,7 +94,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Create "Select" column and specify category by page.
 
-    ![image-2](images/image-2.png)
+    ![image-2](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-2.png)
 
   - Pass `category_column_name` to parameter.
 
@@ -109,7 +109,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Create "Select" column and specify status of page.
 
-    ![image-3](images/image-3.png)
+    ![image-3](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-3.png)
 
   - Pass `status_column_name`, `current_status`, `next_status` to parameter.
 
@@ -124,7 +124,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - After extract page, status will be changed.
 
-    ![image-4](images/image-4.png)
+    ![image-4](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-4.png)
 
   #### Example : Apply filter
 
