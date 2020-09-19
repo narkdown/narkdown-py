@@ -9,7 +9,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 ---
 
 > ⚠️ **_NOTE:_** [Notion2Github](https://github.com/younho9/notion2github) uses customized version of [notion-py](https://github.com/jamalex/notion-py) created by [Jamie Alexandre](https://github.com/jamalex). That repository seems to be abandoned.
-> Use with caution. This is based on the private Notion API. It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
+> Also, this is based on the private Notion API. It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
 
 ---
 
@@ -90,52 +90,52 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 - <details><summary>Click here.</summary>
 
-      	#### Example : Categorize content by "Select" property.
+  #### Example : Categorize content by "Select" property.
 
-      	- Create "Select" column and specify category by page.
+  - Create "Select" column and specify category by page.
 
-      		![image-2](images/image-2.png)
+    ![image-2](images/image-2.png)
 
-      	- Pass `category_column_name` to parameter.
+  - Pass `category_column_name` to parameter.
 
-      		```python
-      		NotionExporter(token).get_notion_pages_from_database(
-      		    url=database_url,
-      		    category_column_name="Category"
-      		)
-      		```
+    ```python
+    NotionExporter(token).get_notion_pages_from_database(
+        url=database_url,
+        category_column_name="Category"
+    )
+    ```
 
-      	#### Example : Get content by status.
+  #### Example : Get content by status.
 
-      	- Create "Select" column and specify status of page.
+  - Create "Select" column and specify status of page.
 
-      		![image-3](images/image-3.png)
+    ![image-3](images/image-3.png)
 
-      	- Pass `status_column_name`, `current_status`, `next_status` to parameter.
+  - Pass `status_column_name`, `current_status`, `next_status` to parameter.
 
-      		```python
-      		NotionExporter(token).get_notion_pages_from_database(
-      		    url=database_url,
-      		    status_column_name="Status",
-      		    current_status="✅ Completed",
-      		    next_status="🖨 Published"
-      		)
-      		```
+    ```python
+    NotionExporter(token).get_notion_pages_from_database(
+        url=database_url,
+        status_column_name="Status",
+        current_status="✅ Completed",
+        next_status="🖨 Published"
+    )
+    ```
 
-      	- After extract page, status will be changed.
+  - After extract page, status will be changed.
 
-      		![image-4](images/image-4.png)
+    ![image-4](images/image-4.png)
 
-      	#### Example : Apply filter
+  #### Example : Apply filter
 
-      	- Pass key, value pair of filter list to `filters` parameter.
+  - Pass key, value pair of filter list to `filters` parameter.
 
-      		```python
-      		NotionExporter(token).get_notion_pages_from_database(
-      		    url=database_url,
-      		    filter={"Name" : "Basic Blocks"}
-      		)
-      		```
+    ```python
+    NotionExporter(token).get_notion_pages_from_database(
+        url=database_url,
+        filter={"Name" : "Basic Blocks"}
+    )
+    ```
 
   </details>
 
