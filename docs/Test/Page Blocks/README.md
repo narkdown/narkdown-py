@@ -2,8 +2,12 @@
 
 ## Page `Support`
 
-[Child Page](https://www.notion.so/41c62b6d8d6740fc80e0c68b7f3d70d7)
+> ☝ Create a child page folder in the current location and import the child page. This happens recursively.
+
+[Child Page](Child%20Page/README.md)
 
 ## Linked Page `Support`
 
-[Notion2Github](https://www.notion.so/4db9629e512f43efbba98000a5c2e381)
+> ☝ Just link to Notion page.
+
+[Linked Page](https://www.notion.so/64c69eaf268a4076bf48d8ee5f2ca8c8)

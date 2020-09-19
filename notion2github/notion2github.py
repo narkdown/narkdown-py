@@ -17,20 +17,27 @@ class Notion2Github:
         self.docs_directory = docs_directory
         self.image_number = 0
 
-    def get_notion_page(self, url, category=""):
+    def get_notion_page(self, url, path="", create_page_directory=True):
         page = self.client.get_block(url)
 
-        self.path = os.path.join(self.docs_directory, category, page.title)
-        create_directory(os.path.join(self.path, "images"))
+        if not path:
+            path = self.docs_directory
+
+        if create_page_directory:
+            path = os.path.join(path, page.title)
+        else:
+            path = os.path.join(path)
+
+        create_directory(os.path.join(path, "images"))
 
         post = "# " + page.title + "\n\n"
-        post = post + self.parse_notion_contents(page.children, "")
+        post = post + self.parse_notion_contents(page.children, path, "")
 
-        write_post(post, self.path)
+        write_post(post, path)
 
         print(
             '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                self.path, page.get_browseable_url()
+                path, page.get_browseable_url()
             )
         )
 
@@ -89,24 +96,24 @@ class Notion2Github:
                 else [self.docs_directory, page.title]
             )
 
-            self.path = os.path.join(*path_set)
-            create_directory(os.path.join(self.path, "images"))
+            path = os.path.join(*path_set)
+            create_directory(os.path.join(path, "images"))
 
             post = "# " + page.title + "\n\n"
-            post = post + self.parse_notion_contents(page.children, "")
+            post = post + self.parse_notion_contents(page.children, path, "")
 
-            write_post(post, self.path)
+            write_post(post, path)
 
             if next_status:
                 page.set_property(status_column_name, next_status)
 
             print(
                 '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                    self.path, page.get_browseable_url()
+                    path, page.get_browseable_url()
                 )
             )
 
-    def parse_notion_contents(self, blocks, offset):
+    def parse_notion_contents(self, blocks, path, offset):
         contents = ""
 
         for index, block in enumerate(blocks):
@@ -132,9 +139,21 @@ class Notion2Github:
             elif block.type == "bookmark":
                 contents += "[" + block.title + "](" + block.link + ")"
             elif block.type == "page":
-                contents += "[" + block.title + "](" + block.get_browseable_url() + ")"
+                if self.client.get_block(block.id).parent == block.parent:
+                    self.get_notion_page(block.get_browseable_url(), path=path)
+                    contents += (
+                        "["
+                        + block.title
+                        + "]("
+                        + block.title.replace(" ", "%20")
+                        + "/README.md)"
+                    )
+                else:
+                    contents += (
+                        "[" + block.title + "](" + block.get_browseable_url() + ")"
+                    )
             elif block.type == "image":
-                image_path = self.get_image_path(block.source)
+                image_path = self.get_image_path(path, block.source)
                 contents += (
                     "![image-" + str(self.image_number) + "](" + image_path + ")"
                 )
@@ -159,24 +178,24 @@ class Notion2Github:
                     continue
                 elif block.type == "toggle":
                     contents += self.parse_notion_contents(
-                        block.children, offset + "\t"
+                        block.children, path, offset + "\t"
                     )
                     contents += offset + "  </details>\n\n"
                 else:
                     contents += self.parse_notion_contents(
-                        block.children, offset + "\t"
+                        block.children, path, offset + "\t"
                     )
 
         return contents
 
-    def get_image_path(self, source):
+    def get_image_path(self, path, source):
         if source.startswith(S3_URL_PREFIX_ENCODED):
             type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
             image_path = "images/image-{0}.{1}".format(self.image_number, type)
 
             try:
                 r = requests.get(source, allow_redirects=True)
-                open(os.path.join(self.path, image_path), "wb").write(r.content)
+                open(os.path.join(path, image_path), "wb").write(r.content)
             except HTTPError as e:
                 print(e.code)
             except URLError as e:
