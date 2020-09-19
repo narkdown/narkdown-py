@@ -1,7 +1,6 @@
 import os
 import sys
 import requests
-from .config import token, page_url, database_url
 from .constants import *
 from .notion.client import NotionClient
 
@@ -12,12 +11,43 @@ class NotionExporter:
         token,
         docs_directory="./docs",
     ):
+        """Initialization of Notion Exporter
+
+        Arguments
+        ---------
+        token : str
+            The "token_v2" cookie from a logged-in browser session on Notion.so.
+
+        docs_directory : str, optional
+            Directory in which the Notion page to extract will be stored.
+
+            Defaults to "./docs".
+            e.g.
+                "." : root directory.
+                "./docs" : create "docs" folder in root directory.
+        """
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
         self.image_number = 0
 
     def get_notion_page(self, url, path="", create_page_directory=True):
+        """Get single Notion page to path
+
+        Arguments
+        ---------
+        url : str
+            URL of the Notion page to extract.
+
+        path : str, optional
+            Specify where you want to save the file. If you pass parameter,
+            then will be created directory under "docs_directory".
+            Defaults to empty string.
+
+        create_page_directory : bool, optional
+            Whether or not to create subdirectory with page title.
+            Defaults to True.
+        """
         page = self.client.get_block(url)
 
         if not path:
@@ -31,7 +61,7 @@ class NotionExporter:
         create_directory(os.path.join(path, "images"))
 
         post = "# " + page.title + "\n\n"
-        post = post + self.parse_notion_contents(page.children, path, "")
+        post = post + self.parse_notion_blocks(page.children, path, "")
 
         write_post(post, path)
 
@@ -50,7 +80,37 @@ class NotionExporter:
         next_status="",
         filters={},
     ):
+        """Get Notion pages from database to "docs_directory"
 
+        Arguments
+        ---------
+        url : str
+            URL of the Notion database to extract.
+
+        category_column_name : str, optional
+            In the Notion database, you can categorize content by category with "Select" property.
+            If you create a "Select" property in the Notion database and pass the name of the column,
+            then folders will be created by category.
+            Defaults to empty string.
+
+        status_column_name : str, optional
+            In the Notion database, you can manage the status of content with "Select" property.
+            If you create a "Select" property in the Notion database and pass the name of the column,
+            you can import contents in a specific state or change the status of the content.
+            Defaults to empty string.
+
+        current_status : str, optional
+            Status of content to import. Must be an option in the "status_column_name" column.
+            Defaults to empty string.
+
+        next_status : str, optional
+            Status of contents after content was imported. Must be an option in the "status_column_name" column.
+            Defaults to empty string.
+
+        filters : dict, optional
+            Key, value pair of filter list to apply to the Notion database.
+            Defaults to empty dict.
+        """
         collection = self.client.get_block(url).collection
 
         if status_column_name:
@@ -100,7 +160,7 @@ class NotionExporter:
             create_directory(os.path.join(path, "images"))
 
             post = "# " + page.title + "\n\n"
-            post = post + self.parse_notion_contents(page.children, path, "")
+            post = post + self.parse_notion_blocks(page.children, path, "")
 
             write_post(post, path)
 
@@ -113,7 +173,25 @@ class NotionExporter:
                 )
             )
 
-    def parse_notion_contents(self, blocks, path, offset):
+    def parse_notion_blocks(self, blocks, path, offset):
+        """Parse Notion blocks
+
+        Arguments
+        ---------
+        blocks : list
+            Block list in Notion page to parse.
+
+        path : str
+            Path where "ChildPage blocks" or "Image blocks" will be stored.
+
+        offset : str
+            Parameter to support indentation of blocks.
+
+        Returns
+        ---------
+        contents : str
+            Markdown contents
+        """
         contents = ""
 
         for index, block in enumerate(blocks):
@@ -177,18 +255,34 @@ class NotionExporter:
                 if block.type == "page":
                     continue
                 elif block.type == "toggle":
-                    contents += self.parse_notion_contents(
+                    contents += self.parse_notion_blocks(
                         block.children, path, offset + "\t"
                     )
                     contents += offset + "  </details>\n\n"
                 else:
-                    contents += self.parse_notion_contents(
+                    contents += self.parse_notion_blocks(
                         block.children, path, offset + "\t"
                     )
 
         return contents
 
     def get_image_path(self, path, source):
+        """Get image and return path of image file.
+
+        Arguments
+        ---------
+        path : str
+            Path where "Image" will be stored.
+
+        source : str
+            Image source to get.
+
+        Returns
+        ---------
+        image_path or source : str
+            If image is uploaded, download it first and return path of image file.
+            If image is linked, then return URL of image source.
+        """
         if source.startswith(S3_URL_PREFIX_ENCODED):
             type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
             image_path = "images/image-{0}.{1}".format(self.image_number, type)
@@ -206,6 +300,22 @@ class NotionExporter:
         return source
 
     def parse_notion_collection(self, table, offset):
+        """Parse Notion collection(aka table or database)
+
+        Arguments
+        ---------
+        table : <class 'notion.collection.Collection'>
+            Notion table block.
+
+        offset : str
+            Parameter to support indentation of blocks.
+
+        Returns
+        ---------
+        contents : str
+            Markdown contents
+        """
+
         columns = list(
             map(
                 lambda i: {"id": i["id"], "name": i["name"], "type": i["type"]},
