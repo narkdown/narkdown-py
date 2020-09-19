@@ -257,12 +257,12 @@ class NotionExporter:
                     continue
                 elif block.type == "toggle":
                     contents += self.parse_notion_blocks(
-                        block.children, path, offset + "\t"
+                        block.children, path, offset + "   "
                     )
                     contents += offset + "  </details>\n\n"
                 else:
                     contents += self.parse_notion_blocks(
-                        block.children, path, offset + "\t"
+                        block.children, path, offset + "   "
                     )
 
         return contents
