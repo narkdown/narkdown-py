@@ -203,9 +203,10 @@ class NotionExporter:
             elif block.type == "sub_sub_header":
                 contents += "#### " + block.title
             elif block.type == "code":
-                contents += (
-                    "```" + block.language.lower() + "\n" + block.title + "\n```"
-                )
+                contents += "```" + block.language.lower() + "\n"
+                contents += offset
+                contents += offset.join(block.title.splitlines(True)) + "\n"
+                contents += offset + "```"
             elif block.type == "callout":
                 contents += "> " + block.icon + " " + block.title
             elif block.type == "quote":
@@ -256,12 +257,12 @@ class NotionExporter:
                     continue
                 elif block.type == "toggle":
                     contents += self.parse_notion_blocks(
-                        block.children, path, offset + "\t"
+                        block.children, path, offset + "   "
                     )
                     contents += offset + "  </details>\n\n"
                 else:
                     contents += self.parse_notion_blocks(
-                        block.children, path, offset + "\t"
+                        block.children, path, offset + "   "
                     )
 
         return contents

@@ -1,6 +1,6 @@
 # Basic Blocks
 
-> ⚠️ [Notion2Github](https://github.com/younho9/notion2github) is a tool to use Notion as a [Github Flavored Markdown](https://github.github.com/gfm/)(a.k.a GFM) editor.
+> ⚠️ [Notion2Github](https://github.com/younho9/notion2github) is a tool to use Notion as a [Github Flavored Markdown](https://github.github.com/gfm/)(aka GFM) editor.
 > So [Notion2Github](https://github.com/younho9/notion2github) Does not support all features that Notion has.
 
 ## Headings `Support`
