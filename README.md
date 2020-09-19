@@ -170,4 +170,4 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 ### License
 
-MIT ©[younho9](https://github.com/younho9)
+MIT © [younho9](https://github.com/younho9)
