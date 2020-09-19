@@ -21,9 +21,9 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 - **Import Notion pages from database to the desired path.**
   Useful for CMS(Contents Manage System) of static pages such as blog or docs page.
 
-      - Support import by status of content.
+  - Support import by status of content.
 
-      - Support filter contents.
+  - Support filter contents.
 
 - **Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link.**
 
