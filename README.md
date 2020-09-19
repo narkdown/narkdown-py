@@ -1,5 +1,7 @@
 # Notion2Github
 
+[![PyPI version](https://badge.fury.io/py/notion2github.svg)](https://badge.fury.io/py/notion2github)
+
 ![image-0](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-0.png)
 
 A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.github.com/gfm/) editor.
