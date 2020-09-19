@@ -143,30 +143,30 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 [View supported blocks by type](/acc3dfd0339e4cacb5baae8673fddfad?v=83b3d2a66f634940987d1142e51da175)
 
-| Notes                                                                                           | Supported         | Block Type           |
-| ----------------------------------------------------------------------------------------------- | ----------------- | -------------------- |
-| [Converted to heading 2 in markdown.](https://bit.ly/3hEM8ak)                                   | ✅Support         | Heading 1            |
-| [Converted to heading 3 in markdown.](https://bit.ly/3hEM8ak)                                   | ✅Support         | Heading 2            |
-| [Converted to heading 4 in markdown.](https://bit.ly/3hEM8ak)                                   | ✅Support         | Heading 3            |
-|                                                                                                 | ✅Support         | Text                 |
-| Divider after the Heading 1 is not added.                                                       | ✅Support         | Divider              |
-| Callout block will be exported as quote block with emoji.                                       | ✅Support         | Callout              |
-|                                                                                                 | ✅Support         | Quote                |
-| Support nested block.                                                                           | ✅Support         | Bulleted list        |
-| Support nested block.                                                                           | ✅Support         | Numbered list        |
-| Support nested block.                                                                           | ✅Support         | To-do list           |
-| Support nested block.                                                                           | ✅Support         | Toggle list          |
-| Support syntax highlighting.                                                                    | ✅Support         | Code                 |
-| Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      | ✅Support         | Image                |
-| Same as link text.                                                                              | ✅Support         | Web bookmark         |
-| Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. | ✅Support         | Page                 |
-| ⚠️The sequence of columns is not guaranteed.                                                    | ⚠️Partial Support | Table (aka database) |
-|                                                                                                 | ❌Not Support     | Video                |
-|                                                                                                 | ❌Not Support     | Audio                |
-|                                                                                                 | ❌Not Support     | File                 |
-|                                                                                                 | ❌Not Support     | Embed other services |
-|                                                                                                 | ❌Not Support     | Advanced             |
-|                                                                                                 | ❌Not Support     | Layout in page       |
+| Block Type           | Supported         | Notes                                                                                           |
+| -------------------- | ----------------- | ----------------------------------------------------------------------------------------------- |
+| Heading 1            | ✅Support         | [Converted to heading 2 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Heading 2            | ✅Support         | [Converted to heading 3 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Heading 3            | ✅Support         | [Converted to heading 4 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Text                 | ✅Support         |                                                                                                 |
+| Divider              | ✅Support         | Divider after the Heading 1 is not added.                                                       |
+| Callout              | ✅Support         | Callout block will be exported as quote block with emoji.                                       |
+| Quote                | ✅Support         |                                                                                                 |
+| Bulleted list        | ✅Support         | Support nested block.                                                                           |
+| Numbered list        | ✅Support         | Support nested block.                                                                           |
+| To-do list           | ✅Support         | Support nested block.                                                                           |
+| Toggle list          | ✅Support         | Support nested block.                                                                           |
+| Code                 | ✅Support         | Support syntax highlighting.                                                                    |
+| Image                | ✅Support         | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
+| Web bookmark         | ✅Support         | Same as link text.                                                                              |
+| Page                 | ✅Support         | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
+| Table (aka database) | ⚠️Partial Support | ⚠️The sequence of columns is not guaranteed.                                                    |
+| Video                | ❌Not Support     |                                                                                                 |
+| Audio                | ❌Not Support     |                                                                                                 |
+| File                 | ❌Not Support     |                                                                                                 |
+| Embed other services | ❌Not Support     |                                                                                                 |
+| Advanced             | ❌Not Support     |                                                                                                 |
+| Layout in page       | ❌Not Support     |                                                                                                 |
 
 ### License
 
