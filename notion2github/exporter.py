@@ -30,7 +30,7 @@ class NotionExporter:
         create_directory(os.path.join(path, "images"))
 
         post = "# " + page.title + "\n\n"
-        post = post + self.parse_notion_contents(page.children, path, "")
+        post = post + self.parse_notion_blocks(page.children, path, "")
 
         write_post(post, path)
 
@@ -99,7 +99,7 @@ class NotionExporter:
             create_directory(os.path.join(path, "images"))
 
             post = "# " + page.title + "\n\n"
-            post = post + self.parse_notion_contents(page.children, path, "")
+            post = post + self.parse_notion_blocks(page.children, path, "")
 
             write_post(post, path)
 
@@ -112,7 +112,7 @@ class NotionExporter:
                 )
             )
 
-    def parse_notion_contents(self, blocks, path, offset):
+    def parse_notion_blocks(self, blocks, path, offset):
         contents = ""
 
         for index, block in enumerate(blocks):
@@ -176,12 +176,12 @@ class NotionExporter:
                 if block.type == "page":
                     continue
                 elif block.type == "toggle":
-                    contents += self.parse_notion_contents(
+                    contents += self.parse_notion_blocks(
                         block.children, path, offset + "\t"
                     )
                     contents += offset + "  </details>\n\n"
                 else:
-                    contents += self.parse_notion_contents(
+                    contents += self.parse_notion_blocks(
                         block.children, path, offset + "\t"
                     )
 
