@@ -534,6 +534,12 @@ class PageBlock(BasicBlock):
         python_to_api=remove_signed_prefix_as_needed,
     )
 
+    cover = field_map(
+        "format.page_cover",
+        api_to_python=add_signed_prefix_as_needed,
+        python_to_api=remove_signed_prefix_as_needed,
+    )
+
 
 class BulletedListBlock(BasicBlock):
 
@@ -735,9 +741,22 @@ class CollectionViewBlockViews(Children):
     child_list_key = "view_ids"
 
     def _get_block(self, view_id):
-        return self._client.get_collection_view(
+
+        view = self._client.get_collection_view(
             view_id, collection=self._parent.collection
         )
+
+        i = 0
+        while view is None:
+            i += 1
+            if i > 20:
+                return None
+            time.sleep(0.1)
+            view = self._client.get_collection_view(
+                view_id, collection=self._parent.collection
+            )
+
+        return view
 
     def add_new(self, view_type="table"):
         if not self._parent.collection:
@@ -769,6 +788,12 @@ class CollectionViewPageBlock(CollectionViewBlock):
 
     icon = field_map(
         "format.page_icon",
+        api_to_python=add_signed_prefix_as_needed,
+        python_to_api=remove_signed_prefix_as_needed,
+    )
+
+    cover = field_map(
+        "format.page_cover",
         api_to_python=add_signed_prefix_as_needed,
         python_to_api=remove_signed_prefix_as_needed,
     )

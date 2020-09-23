@@ -33,7 +33,7 @@ def create_session():
     """
     session = Session()
     retry = Retry(
-        status=5,
+        5,
         backoff_factor=0.3,
         status_forcelist=(502,),
         # CAUTION: adding 'POST' to this list which is not technically idempotent
@@ -53,7 +53,7 @@ class NotionClient(object):
 
     def __init__(
         self,
-        token_v2,
+        token_v2=None,
         monitor=False,
         start_monitoring=False,
         enable_caching=False,
@@ -72,7 +72,8 @@ class NotionClient(object):
                 self.start_monitoring()
         else:
             self._monitor = None
-        self._update_user_info()
+        if token_v2:
+            self._update_user_info()
 
     def start_monitoring(self):
         self._monitor.poll_async()
