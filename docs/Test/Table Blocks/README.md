@@ -10,7 +10,7 @@
 | `** ** and _ _`   | **This text is** **_extremely_** **important** | ['Support']     | **This text is _extremely_ important**      |                             | Bold and nested italic |
 | `**_ _**`         | **_All this text is important_**               | ['Support']     | **_All this text is important_**            |                             | All bold and italic    |
 | `~~**_ _**~~`     | ~~**_This text is mixed_**~~                   | ['Support']     | ~~**_This text is mixed_**~~                |                             | mixed                  |
-| ` `               | `console.log('hello');`                        | ['Support']     | `console.log('hello');`                     | `Cmd/Ctrl` + `E`            | Inline Code            |
+| \` \`             | `console.log('hello');`                        | ['Support']     | `console.log('hello');`                     | `Cmd/Ctrl` + `E`            | Inline Code            |
 | `[alt text](url)` | [this text is link](https://bit.ly/33x1vN5)    | ['Support']     | [this text is link](https://bit.ly/33x1vN5) | `Cmd/Ctrl` + `K`            | Link                   |
 |                   | This text has underline                        | ['Not Support'] | This text has underline                     | `Cmd/Ctrl` + `U`            | Underline              |
 |                   | This text has color                            | ['Not Support'] | This text has color                         | `Cmd/Ctrl` + `Shfit` + `H`  | Color                  |
