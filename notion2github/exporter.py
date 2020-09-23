@@ -71,6 +71,8 @@ class NotionExporter:
             )
         )
 
+        self.image_number = 0
+
     def get_notion_pages_from_database(
         self,
         url,
@@ -172,6 +174,8 @@ class NotionExporter:
                     path, page.get_browseable_url()
                 )
             )
+
+            self.image_number = 0
 
     def parse_notion_blocks(self, blocks, path, offset):
         """Parse Notion blocks
