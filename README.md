@@ -201,7 +201,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Register `token_v2` and `url` of page to synchronize in github's secret.
 
-    ![image-5](images/image-5.png)
+    ![image-5](https://github.com/younho9/notion2github/blob/main/images/image-5.png)
 
   - Allow python files to receive arguments.
 
