@@ -248,7 +248,10 @@ class NotionExporter:
             elif block.type == "text":
                 contents += block.title
             elif block.type == "collection_view":
-                contents += self.parse_notion_collection(block.collection, offset)
+                if block.collection:
+                    contents += self.parse_notion_collection(block.collection, offset)
+                else:
+                    block.remove()
 
             contents += "\n\n"
 
