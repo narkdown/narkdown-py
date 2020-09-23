@@ -1,0 +1,42 @@
+name: Get posts from Notion and publish it to Github
+on:
+  schedule:
+    - cron: '0 14 * * *'
+
+jobs:
+  get-posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Get posts from notion
+        run: |
+          python auto_sync.py ${{ secrets.NOTION_TOKEN }} ${{ secrets.DATABASE_URL }}
+
+      - name: Set up Node 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Format
+        run: |
+          cd docs
+          npm ci
+          npm run format
+
+      - name: Git auto commit action
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'docs: Update docs'
