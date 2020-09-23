@@ -137,6 +137,9 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Dependency directories
+node_modules/
+
 # IDE
 .vscode/
 
