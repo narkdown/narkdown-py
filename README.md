@@ -17,10 +17,16 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 ## Features
 
+- **Auto synchronization of Notion2Github by using Github Actions and crontab.**
+
+- **Format documents by using Prettier.**
+
 - **Import a Notion page and save it to the desired path.**
+
   Useful for simple markdown exporter.
 
 - **Import Notion pages from database to the desired path.**
+
   Useful for CMS(Contents Manage System) of static pages such as blog or docs page.
 
   - Support import by status of content.
@@ -88,6 +94,58 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
        )
    ```
 
+### Format Documents
+
+- Create `package.json` file to your document directory.
+
+  - Example
+
+  ```json
+  {
+    "name": "notion2github-docs",
+    "dependencies": {
+      "prettier": "2.1.1"
+    },
+    "scripts": {
+      "format": "prettier --write ."
+    },
+    "author": "younho9",
+    "license": "MIT"
+  }
+  ```
+
+- Install dependencies
+
+  ```bash
+  cd docs # your documents directory
+  npm install
+  ```
+
+- Add prettier setting
+
+  `.prettierrc` (example)
+
+  ```json
+  {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "semi": true,
+    "useTabs": false,
+    "arrowParens": "avoid",
+    "endOfLine": "lf"
+  }
+  ```
+
+- Using npm scripts
+
+  ```bash
+  cd docs # your documents directory
+  npm run format
+  ```
+
 ### Examples
 
 - <details><summary>Click here.</summary>
@@ -139,36 +197,70 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
     )
     ```
 
+  #### Example : Auto synchronization of Notion and Github
+
+  - Register `token_v2` and `url` of page to synchronize in github's secret.
+
+    ![image-5](images/image-5.png)
+
+  - Allow python files to receive arguments.
+
+    ```python
+    # auto_sync.py
+
+    import sys
+    from notion2github.exporter import NotionExporter
+
+    if __name__ == "__main__":
+        token = sys.argv[1]
+        database_url = sys.argv[2]
+
+        """
+        Get contents from the database that is in the "✅ Completed" state,
+        and update it to the "🖨 Published" state.
+        """
+        NotionExporter(token).get_notion_pages_from_database(
+            url=database_url,
+            category_column_name="Category",
+            status_column_name="Status",
+            current_status="✅ Completed",
+            next_status="🖨 Published",
+            filters={},
+        )
+    ```
+
+  - [Create github actions workflow file](https://github.com/younho9/notion2github/blob/main/.github/workflows/auto-sync.yml) to `.github/workflows`
+
   </details>
 
 ## Supported Blocks
 
 [View supported blocks by type](https://bit.ly/32PzfpT)
 
-| Block Type           | Supported         | Notes                                                                                           |
-| -------------------- | ----------------- | ----------------------------------------------------------------------------------------------- |
-| Heading 1            | ✅Support         | [Converted to heading 2 in markdown.](https://bit.ly/3hEM8ak)                                   |
-| Heading 2            | ✅Support         | [Converted to heading 3 in markdown.](https://bit.ly/3hEM8ak)                                   |
-| Heading 3            | ✅Support         | [Converted to heading 4 in markdown.](https://bit.ly/3hEM8ak)                                   |
-| Text                 | ✅Support         |                                                                                                 |
-| Divider              | ✅Support         | Divider after the Heading 1 is not added.                                                       |
-| Callout              | ✅Support         | Callout block will be exported as quote block with emoji.                                       |
-| Quote                | ✅Support         |                                                                                                 |
-| Bulleted list        | ✅Support         | Support nested block.                                                                           |
-| Numbered list        | ✅Support         | Support nested block.                                                                           |
-| To-do list           | ✅Support         | Support nested block.                                                                           |
-| Toggle list          | ✅Support         | Support nested block.                                                                           |
-| Code                 | ✅Support         | Support syntax highlighting.                                                                    |
-| Image                | ✅Support         | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
-| Web bookmark         | ✅Support         | Same as link text.                                                                              |
-| Page                 | ✅Support         | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
-| Table (aka database) | ⚠️Partial Support | ⚠️The sequence of columns is not guaranteed.                                                    |
-| Video                | ❌Not Support     |                                                                                                 |
-| Audio                | ❌Not Support     |                                                                                                 |
-| File                 | ❌Not Support     |                                                                                                 |
-| Embed other services | ❌Not Support     |                                                                                                 |
-| Advanced             | ❌Not Support     |                                                                                                 |
-| Layout in page       | ❌Not Support     |                                                                                                 |
+| Block Type           | Supported  | Notes                                                                                           |
+| -------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| Heading 1            | ✅ Yes     | [Converted to heading 2 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Heading 2            | ✅ Yes     | [Converted to heading 3 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Heading 3            | ✅ Yes     | [Converted to heading 4 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Text                 | ✅ Yes     |                                                                                                 |
+| Divider              | ✅ Yes     | Divider after the Heading 1 is not added.                                                       |
+| Callout              | ✅ Yes     | Callout block will be exported as quote block with emoji.                                       |
+| Quote                | ✅ Yes     |                                                                                                 |
+| Bulleted list        | ✅ Yes     | Support nested block.                                                                           |
+| Numbered list        | ✅ Yes     | Support nested block.                                                                           |
+| To-do list           | ✅ Yes     | Support nested block.                                                                           |
+| Toggle list          | ✅ Yes     | Support nested block.                                                                           |
+| Code                 | ✅ Yes     | Support syntax highlighting.                                                                    |
+| Image                | ✅ Yes     | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
+| Web bookmark         | ✅ Yes     | Same as link text.                                                                              |
+| Page                 | ✅ Yes     | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
+| Table (aka database) | ⚠️ Partial | ⚠️The sequence of columns is not guaranteed.                                                    |
+| Video                | ❌ No      |                                                                                                 |
+| Audio                | ❌ No      |                                                                                                 |
+| File                 | ❌ No      |                                                                                                 |
+| Embed other services | ❌ No      |                                                                                                 |
+| Advanced             | ❌ No      |                                                                                                 |
+| Layout in page       | ❌ No      |                                                                                                 |
 
 ### License
 
