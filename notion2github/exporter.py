@@ -79,6 +79,7 @@ class NotionExporter:
         current_status="",
         next_status="",
         filters={},
+        create_page_directory=True,
     ):
         """Get Notion pages from database to "docs_directory"
 
@@ -110,6 +111,10 @@ class NotionExporter:
         filters : dict, optional
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
+
+        create_page_directory : bool, optional
+            Whether or not to create subdirectory with page title.
+            Defaults to True.
         """
         collection = self.client.get_block(url).collection
 
@@ -146,34 +151,18 @@ class NotionExporter:
             pages = list(filter(lambda page: page.get_property(key) == value, pages))
 
         for page in pages:
-            path_set = (
-                [
-                    self.docs_directory,
-                    page.get_property(category_column_name),
-                    page.title,
-                ]
-                if category_column_name and page.get_property(category_column_name)
-                else [self.docs_directory, page.title]
+            path = ""
+            if category_column_name and page.get_property(category_column_name):
+                path = page.get_property(category_column_name).replace(" ", "-")
+
+            self.get_notion_page(
+                page.get_browseable_url(),
+                sub_path=path,
+                create_page_directory=create_page_directory,
             )
-
-            path = os.path.join(*path_set)
-            create_directory(os.path.join(path, "images"))
-
-            post = "# " + page.title + "\n\n"
-            post = post + self.parse_notion_blocks(page.children, path, "")
-
-            write_post(post, path)
 
             if next_status:
                 page.set_property(status_column_name, next_status)
-
-            print(
-                '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                    path, page.get_browseable_url()
-                )
-            )
-
-            self.image_number = 0
 
     def parse_notion_blocks(self, blocks, path, offset):
         """Parse Notion blocks
