@@ -29,7 +29,6 @@ class NotionExporter:
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
-        self.image_number = 0
 
     def get_notion_page(self, url, sub_path="", create_page_directory=True):
         """Get single Notion page to path
@@ -222,22 +221,23 @@ class NotionExporter:
                 contents += "[" + block.title + "](" + block.link + ")"
             elif block.type == "page":
                 if self.client.get_block(block.id).parent == block.parent:
-                    self.get_notion_page(block.get_browseable_url(), path=path)
-                    contents += (
-                        "["
-                        + block.title
-                        + "]("
-                        + block.title.replace(" ", "%20")
-                        + "/README.md)"
+                    filename = self.filename
+                    parent_image_number = self.image_number
+
+                    self.get_notion_page(block.get_browseable_url(), sub_path=path)
+                    contents += "[{0}]({1}/{1}.md)".format(
+                        block.title, block.title.replace(" ", "-")
                     )
+                    self.filename = filename
+                    self.image_number = parent_image_number
                 else:
                     contents += (
                         "[" + block.title + "](" + block.get_browseable_url() + ")"
                     )
             elif block.type == "image":
                 image_path = self.get_image_path(path, block.source)
-                contents += (
-                    "![image-" + str(self.image_number) + "](" + image_path + ")"
+                contents += "![{0}-image-{1}]({2})".format(
+                    self.filename, str(self.image_number), image_path
                 )
                 self.image_number += 1
             elif block.type == "bulleted_list":
@@ -291,12 +291,18 @@ class NotionExporter:
             If image is linked, then return URL of image source.
         """
         if source.startswith(S3_URL_PREFIX_ENCODED):
+            create_directory(os.path.join(self.docs_directory, path, "images"))
+
             type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
-            image_path = "images/image-{0}.{1}".format(self.image_number, type)
+            image_path = "images/{0}-image-{1}.{2}".format(
+                self.filename, self.image_number, type
+            )
 
             try:
                 r = requests.get(source, allow_redirects=True)
-                open(os.path.join(path, image_path), "wb").write(r.content)
+                open(os.path.join(self.docs_directory, path, image_path), "wb").write(
+                    r.content
+                )
             except HTTPError as e:
                 print(e.code)
             except URLError as e:
