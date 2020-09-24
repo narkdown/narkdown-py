@@ -64,6 +64,8 @@ class NotionExporter:
 
         if self.filename[-1] == "-":
             self.filename = self.filename[:-1]
+        if self.filename[0] == "-":
+            self.filename = self.filename[1:]
 
         self.image_number = 0
 
