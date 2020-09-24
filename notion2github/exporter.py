@@ -31,7 +31,7 @@ class NotionExporter:
         self.docs_directory = docs_directory
         self.image_number = 0
 
-    def get_notion_page(self, url, path="", create_page_directory=True):
+    def get_notion_page(self, url, sub_path="", create_page_directory=True):
         """Get single Notion page to path
 
         Arguments
@@ -39,7 +39,7 @@ class NotionExporter:
         url : str
             URL of the Notion page to extract.
 
-        path : str, optional
+        sub_path : str, optional
             Specify where you want to save the file. If you pass parameter,
             then will be created directory under "docs_directory".
             Defaults to empty string.
@@ -50,28 +50,27 @@ class NotionExporter:
         """
         page = self.client.get_block(url)
 
-        if not path:
-            path = self.docs_directory
-
+        path_set = [sub_path]
         if create_page_directory:
-            path = os.path.join(path, page.title)
-        else:
-            path = os.path.join(path)
+            path_set.append(page.title)
 
-        create_directory(os.path.join(path, "images"))
+        sub_path = os.path.join(*path_set).replace(" ", "-")
+        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
+        create_directory(full_path)
+
+        self.filename = page.title.replace(" ", "-")
+        self.image_number = 0
 
         post = "# " + page.title + "\n\n"
-        post = post + self.parse_notion_blocks(page.children, path, "")
+        post = post + self.parse_notion_blocks(page.children, sub_path, "")
 
-        write_post(post, path)
+        write_post(post, full_path, self.filename)
 
         print(
             '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                path, page.get_browseable_url()
+                full_path, page.get_browseable_url()
             )
         )
-
-        self.image_number = 0
 
     def get_notion_pages_from_database(
         self,
@@ -371,6 +370,6 @@ def create_directory(path):
             pass
 
 
-def write_post(post, path):
-    file = open(path + "/README.md", "w")
+def write_post(post, path, title):
+    file = open(path + "/" + title + ".md", "w")
     file.write(post)
