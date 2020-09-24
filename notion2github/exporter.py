@@ -1,6 +1,7 @@
 import os
 import sys
 import requests
+import re
 from .constants import *
 from .notion.client import NotionClient
 
@@ -57,7 +58,13 @@ class NotionExporter:
         full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
         create_directory(full_path)
 
-        self.filename = page.title.replace(" ", "-")
+        self.filename = re.sub(
+            "--+", "-", re.sub(r"[\(\)\{\}\[\]\,\.\/ ]", "-", page.title)
+        )
+
+        if self.filename[-1] == "-":
+            self.filename = self.filename[:-1]
+
         self.image_number = 0
 
         post = "# " + page.title + "\n\n"
