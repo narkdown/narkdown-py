@@ -29,9 +29,8 @@ class NotionExporter:
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
-        self.image_number = 0
 
-    def get_notion_page(self, url, path="", create_page_directory=True):
+    def get_notion_page(self, url, sub_path="", create_page_directory=True):
         """Get single Notion page to path
 
         Arguments
@@ -39,7 +38,7 @@ class NotionExporter:
         url : str
             URL of the Notion page to extract.
 
-        path : str, optional
+        sub_path : str, optional
             Specify where you want to save the file. If you pass parameter,
             then will be created directory under "docs_directory".
             Defaults to empty string.
@@ -50,28 +49,27 @@ class NotionExporter:
         """
         page = self.client.get_block(url)
 
-        if not path:
-            path = self.docs_directory
-
+        path_set = [sub_path]
         if create_page_directory:
-            path = os.path.join(path, page.title)
-        else:
-            path = os.path.join(path)
+            path_set.append(page.title)
 
-        create_directory(os.path.join(path, "images"))
+        sub_path = os.path.join(*path_set).replace(" ", "-")
+        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
+        create_directory(full_path)
+
+        self.filename = page.title.replace(" ", "-")
+        self.image_number = 0
 
         post = "# " + page.title + "\n\n"
-        post = post + self.parse_notion_blocks(page.children, path, "")
+        post = post + self.parse_notion_blocks(page.children, sub_path, "")
 
-        write_post(post, path)
+        write_post(post, full_path, self.filename)
 
         print(
             '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                path, page.get_browseable_url()
+                full_path, page.get_browseable_url()
             )
         )
-
-        self.image_number = 0
 
     def get_notion_pages_from_database(
         self,
@@ -81,6 +79,7 @@ class NotionExporter:
         current_status="",
         next_status="",
         filters={},
+        create_page_directory=True,
     ):
         """Get Notion pages from database to "docs_directory"
 
@@ -112,6 +111,10 @@ class NotionExporter:
         filters : dict, optional
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
+
+        create_page_directory : bool, optional
+            Whether or not to create subdirectory with page title.
+            Defaults to True.
         """
         collection = self.client.get_block(url).collection
 
@@ -148,34 +151,18 @@ class NotionExporter:
             pages = list(filter(lambda page: page.get_property(key) == value, pages))
 
         for page in pages:
-            path_set = (
-                [
-                    self.docs_directory,
-                    page.get_property(category_column_name),
-                    page.title,
-                ]
-                if category_column_name and page.get_property(category_column_name)
-                else [self.docs_directory, page.title]
+            path = ""
+            if category_column_name and page.get_property(category_column_name):
+                path = page.get_property(category_column_name).replace(" ", "-")
+
+            self.get_notion_page(
+                page.get_browseable_url(),
+                sub_path=path,
+                create_page_directory=create_page_directory,
             )
-
-            path = os.path.join(*path_set)
-            create_directory(os.path.join(path, "images"))
-
-            post = "# " + page.title + "\n\n"
-            post = post + self.parse_notion_blocks(page.children, path, "")
-
-            write_post(post, path)
 
             if next_status:
                 page.set_property(status_column_name, next_status)
-
-            print(
-                '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                    path, page.get_browseable_url()
-                )
-            )
-
-            self.image_number = 0
 
     def parse_notion_blocks(self, blocks, path, offset):
         """Parse Notion blocks
@@ -223,22 +210,23 @@ class NotionExporter:
                 contents += "[" + block.title + "](" + block.link + ")"
             elif block.type == "page":
                 if self.client.get_block(block.id).parent == block.parent:
-                    self.get_notion_page(block.get_browseable_url(), path=path)
-                    contents += (
-                        "["
-                        + block.title
-                        + "]("
-                        + block.title.replace(" ", "%20")
-                        + "/README.md)"
+                    filename = self.filename
+                    parent_image_number = self.image_number
+
+                    self.get_notion_page(block.get_browseable_url(), sub_path=path)
+                    contents += "[{0}]({1}/{1}.md)".format(
+                        block.title, block.title.replace(" ", "-")
                     )
+                    self.filename = filename
+                    self.image_number = parent_image_number
                 else:
                     contents += (
                         "[" + block.title + "](" + block.get_browseable_url() + ")"
                     )
             elif block.type == "image":
                 image_path = self.get_image_path(path, block.source)
-                contents += (
-                    "![image-" + str(self.image_number) + "](" + image_path + ")"
+                contents += "![{0}-image-{1}]({2})".format(
+                    self.filename, str(self.image_number), image_path
                 )
                 self.image_number += 1
             elif block.type == "bulleted_list":
@@ -292,12 +280,18 @@ class NotionExporter:
             If image is linked, then return URL of image source.
         """
         if source.startswith(S3_URL_PREFIX_ENCODED):
+            create_directory(os.path.join(self.docs_directory, path, "images"))
+
             type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
-            image_path = "images/image-{0}.{1}".format(self.image_number, type)
+            image_path = "images/{0}-image-{1}.{2}".format(
+                self.filename, self.image_number, type
+            )
 
             try:
                 r = requests.get(source, allow_redirects=True)
-                open(os.path.join(path, image_path), "wb").write(r.content)
+                open(os.path.join(self.docs_directory, path, image_path), "wb").write(
+                    r.content
+                )
             except HTTPError as e:
                 print(e.code)
             except URLError as e:
@@ -371,6 +365,6 @@ def create_directory(path):
             pass
 
 
-def write_post(post, path):
-    file = open(path + "/README.md", "w")
+def write_post(post, path, title):
+    file = open(path + "/" + title + ".md", "w")
     file.write(post)
