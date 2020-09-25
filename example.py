@@ -16,17 +16,18 @@ if __name__ == "__main__":
         url=readme_url, create_page_directory=False
     )
 
-    # Get directory README.md
+    # # Get directory README.md
     NotionExporter(token, "./docs").get_notion_page(
         url=docs_page_url, create_page_directory=False
     )
 
     # Get all contents from database
-    NotionExporter(token).get_notion_pages_from_database(
+    NotionExporter(token, "./docs").get_notion_pages_from_database(
         url=database_url,
         category_column_name="Category",
         status_column_name="Status",
         current_status="",
         next_status="",
         filters={},
+        create_page_directory=False,
     )
