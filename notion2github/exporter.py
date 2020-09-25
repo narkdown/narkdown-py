@@ -75,8 +75,8 @@ class NotionExporter:
         write_post(post, full_path, self.filename)
 
         print(
-            '✅ Successfully exported page To "{0}" From "{1}"'.format(
-                full_path, page.get_browseable_url()
+            '✅ Successfully exported page To "{0}.md" From "{1}"'.format(
+                full_path + self.filename, page.get_browseable_url()
             )
         )
 
