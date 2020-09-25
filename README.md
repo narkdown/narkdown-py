@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/notion2github.svg)](https://badge.fury.io/py/notion2github)
 
-![image-0](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-0.png)
+![Notion2Github-image-0](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-0.png)
 
 A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.github.com/gfm/) editor.
 
@@ -51,43 +51,53 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
 1. Get `token_v2` cookie from a logged-in browser session on Notion.so.
 
-   ![image-1](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-1.png)
+   ![Notion2Github-image-1](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-1.png)
 
-1. Add [`config.py`](https://github.com/younho9/notion2github/blob/main/config.py.example) in root directory
+1. Add [`config.json`](https://github.com/younho9/notion2github/blob/main/config.json.example) in root directory
 
-   ```python
-   token=
-   database_url=
-   page1_url=
-   page2_url=
-   page3_url=
-   page4_url=
-   # ... and so on
+   ```json
+   {
+       "TOKEN":
+       "DATABASE_URL":
+       "PAGE1_URL":
+       "PAGE2_URL":
+       "PAGE3_URL":
+       "PAGE4_URL":
+       // and so on ...
+   }
    ```
 
 1. Use it like an [`example.py`](https://github.com/younho9/notion2github/blob/main/example.py)
 
    ```python
    import sys
-   from config import token, page1_url, page2_url, database_url
+   import json
    from notion2github.exporter import NotionExporter
 
    if __name__ == "__main__":
+       with open("config.json", "r") as f:
+           config = json.load(f)
+
+       token = config["TOKEN"]
+       readme_url = config["README_URL"]
+       docs_page_url = config["DOCS_PAGE_URL"]
+       database_url = config["DATABASE_URL"]
+
        # Get project README.md
        NotionExporter(token, ".").get_notion_page(
-           url=page1_url, create_page_directory=False
+           url=readme_url, create_page_directory=False
        )
 
        # Get directory README.md
        NotionExporter(token, "./docs").get_notion_page(
-           url=page2_url, create_page_directory=False
+           url=docs_page_url, create_page_directory=False
        )
 
        # Get all contents from database
        NotionExporter(token).get_notion_pages_from_database(
            url=database_url,
            category_column_name="Category",
-           status_column_name="",
+           status_column_name="Status",
            current_status="",
            next_status="",
            filters={},
@@ -154,7 +164,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Create "Select" column and specify category by page.
 
-    ![image-2](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-2.png)
+    ![Notion2Github-image-2](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-2.png)
 
   - Pass `category_column_name` to parameter.
 
@@ -169,7 +179,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Create "Select" column and specify status of page.
 
-    ![image-3](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-3.png)
+    ![Notion2Github-image-3](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-3.png)
 
   - Pass `status_column_name`, `current_status`, `next_status` to parameter.
 
@@ -184,7 +194,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - After extract page, status will be changed.
 
-    ![image-4](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-4.png)
+    ![Notion2Github-image-4](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-4.png)
 
   #### Example : Apply filter
 
@@ -201,7 +211,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 
   - Register `token_v2` and `url` of page to synchronize in github's secret.
 
-    ![image-5](https://github.com/younho9/notion2github/blob/main/images/image-5.png)
+    ![Notion2Github-image-5](https://raw.githubusercontent.com/younho9/notion2github/main/images/image-5.png)
 
   - Allow python files to receive arguments.
 
@@ -254,7 +264,7 @@ A tool to use Notion as a [Github Flavored Markdown(aka GFM)](https://github.git
 | Image                | ✅ Yes     | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
 | Web bookmark         | ✅ Yes     | Same as link text.                                                                              |
 | Page                 | ✅ Yes     | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
-| Table (aka database) | ⚠️ Partial | ⚠️The sequence of columns is not guaranteed.                                                    |
+| Table (aka database) | ⚠️ Partial | ⚠️ The sequence of columns is not guaranteed.                                                   |
 | Video                | ❌ No      |                                                                                                 |
 | Audio                | ❌ No      |                                                                                                 |
 | File                 | ❌ No      |                                                                                                 |
