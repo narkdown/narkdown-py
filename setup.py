@@ -17,7 +17,7 @@ install_requires = get_requirements("requirements.txt")
 
 setuptools.setup(
     name="notion2github",
-    version="1.0.5",
+    version="1.0.6",
     author="younho9",
     author_email="younho9.choo@gmail.com",
     description="A tool to use Notion as a Github Flavored Markdown(aka GFM) editor.",
