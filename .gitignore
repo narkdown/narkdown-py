@@ -144,7 +144,7 @@ node_modules/
 .vscode/
 
 # config
-config.py
+config.json
 
 # Mac OS
 .DS_Store
