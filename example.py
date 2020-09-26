@@ -1,6 +1,6 @@
 import sys
 import json
-from notion2github.exporter import NotionExporter
+from narkdown.exporter import NotionExporter
 
 if __name__ == "__main__":
     with open("config.json", "r") as f:

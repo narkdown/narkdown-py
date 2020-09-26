@@ -3,6 +3,7 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as f:
     readme = f.read()
 
+
 def get_requirements(fname):
     "Takes requirements from requirements.txt and returns a list."
     with open(fname) as fp:
@@ -13,21 +14,22 @@ def get_requirements(fname):
                 reqs.append(lib.strip())
         return reqs
 
+
 install_requires = get_requirements("requirements.txt")
 
 setuptools.setup(
-    name="notion2github",
+    name="narkdown",
     version="1.0.6",
     author="younho9",
     author_email="younho9.choo@gmail.com",
-    description="A tool to use Notion as a Github Flavored Markdown(aka GFM) editor.",
+    description="A tool to use Notion as a Markdown editor.",
     long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/younho9/notion2github",
+    url="https://github.com/younho9/narkdown",
     install_requires=install_requires,
     include_package_data=True,
     packages=setuptools.find_packages(),
-    keywords=["notion", "github"],
+    keywords=["notion", "github", "markdown"],
     python_requires=">=3.5",
     classifiers=[
         "Programming Language :: Python :: 3",

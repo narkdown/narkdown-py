@@ -1,5 +1,5 @@
 {
-  "name": "notion2github-docs",
+  "name": "narkdown-docs",
   "dependencies": {
     "prettier": "2.1.1"
   },
