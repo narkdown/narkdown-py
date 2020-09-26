@@ -1,5 +1,5 @@
 import sys
-from notion2github.exporter import NotionExporter
+from narkdown.exporter import NotionExporter
 
 if __name__ == "__main__":
     token = sys.argv[1]

@@ -46,12 +46,11 @@ class HelloWorldApp {
 ### JavaScript
 
 ```javascript
-console.log("Hello World!");
+console.log('Hello World!');
 ```
 
 ### TypeScript
 
 ```typescript
-console.log("Hello World!");
+console.log('Hello World!');
 ```
-

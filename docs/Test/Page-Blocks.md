@@ -6,11 +6,8 @@
 
 [Child Page](Child-Page/Child-Page.md)
 
-
-
 ## Linked Page `Support`
 
 > ☝ Just link to Notion page.
 
 [Linked Page](https://www.notion.so/64c69eaf268a4076bf48d8ee5f2ca8c8)
-

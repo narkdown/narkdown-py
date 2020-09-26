@@ -13,4 +13,3 @@
 ![Recursive-embed-Image-image-2](images/Recursive-embed-Image-image-2.jpeg)
 
 ![Recursive-embed-Image-image-3](images/Recursive-embed-Image-image-3.jpeg)
-
