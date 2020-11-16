@@ -71,7 +71,7 @@ class NotionExporter:
 
         post = "---\n"
         post += "id: " + self.filename + "\n"
-        post += "title: " + page.title + "\n"
+        post += "title: '" + page.title + "'\n"
         post += "---\n\n"
         post = post + self.parse_notion_blocks(page.children, sub_path, "")
 
