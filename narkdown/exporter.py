@@ -77,6 +77,9 @@ class NotionExporter:
 
         write_post(post, full_path, self.filename)
 
+        if len(sub_path) != 0:
+            full_path += "/"
+
         print(
             '✅ Successfully exported page To "{0}.md" From "{1}"'.format(
                 full_path + self.filename, page.get_browseable_url()
