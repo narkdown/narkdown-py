@@ -69,7 +69,10 @@ class NotionExporter:
 
         self.image_number = 0
 
-        post = "# " + page.title + "\n\n"
+        post = "---\n"
+        post += "id: " + self.filename + "\n"
+        post += "title: " + page.title + "\n"
+        post += "---\n\n"
         post = post + self.parse_notion_blocks(page.children, sub_path, "")
 
         write_post(post, full_path, self.filename)
