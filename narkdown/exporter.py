@@ -77,7 +77,7 @@ class NotionExporter:
             path_set.append(page.title)
 
         sub_path = os.path.join(*path_set).replace(" ", "-")
-        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
+        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-").lower()
         create_directory(full_path)
 
         self.filename = ""
@@ -93,6 +93,8 @@ class NotionExporter:
             self.filename = self.filename[:-1]
         if self.filename[0] == "-":
             self.filename = self.filename[1:]
+
+        self.filename = self.filename.lower()
 
         self.image_number = 0
 
