@@ -16,4 +16,3 @@ title: 'Recursive embed Image'
 ![2020-09-24-Recursive-embed-Image-image-2](images/2020-09-24-Recursive-embed-Image-image-2.jpeg)
 
 ![2020-09-24-Recursive-embed-Image-image-3](images/2020-09-24-Recursive-embed-Image-image-3.jpeg)
-

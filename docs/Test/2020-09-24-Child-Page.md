@@ -16,4 +16,3 @@ title: 'Child Page'
 ![2020-09-24-Child-Page-image-2](images/2020-09-24-Child-Page-image-2.jpeg)
 
 ![2020-09-24-Child-Page-image-3](images/2020-09-24-Child-Page-image-3.jpeg)
-
