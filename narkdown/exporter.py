@@ -234,6 +234,7 @@ class NotionExporter:
             path = ""
             if category_column_name and page.get_property(category_column_name):
                 path = page.get_property(category_column_name).replace(" ", "-")
+                path = re.sub("--+", "-", re.sub(r"[\(\)\{\}\[\]\,\.\/ ]", "-", path))
 
             tags = []
             if tags_column_name and page.get_property(tags_column_name):
