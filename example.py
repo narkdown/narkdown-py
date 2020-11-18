@@ -12,22 +12,34 @@ if __name__ == "__main__":
     database_url = config["DATABASE_URL"]
 
     # Get project README.md
-    NotionExporter(token, ".").get_notion_page(
-        url=readme_url, create_page_directory=False
-    )
+    NotionExporter(
+        token=token,
+        docs_directory=".",
+        create_page_directory=False,
+        add_metadata=False,
+    ).get_notion_page(url=readme_url)
 
     # # Get directory README.md
-    NotionExporter(token, "./docs").get_notion_page(
-        url=docs_page_url, create_page_directory=False
-    )
+    NotionExporter(
+        token=token,
+        docs_directory="./docs",
+        create_page_directory=False,
+        add_metadata=False,
+    ).get_notion_page(url=docs_page_url)
 
     # Get all contents from database
-    NotionExporter(token, "./docs").get_notion_pages_from_database(
+    NotionExporter(
+        token=token,
+        docs_directory="./docs",
+        create_page_directory=False,
+        add_metadata=True,
+    ).get_notion_pages_from_database(
         url=database_url,
         category_column_name="Category",
+        tags_column_name="Tags",
         status_column_name="Status",
         current_status="",
         next_status="",
         filters={},
-        create_page_directory=False,
+        add_date_to_filename=True,
     )

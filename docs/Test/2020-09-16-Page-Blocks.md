@@ -1,4 +1,7 @@
-# Page Blocks
+---
+id: 2020-09-16-Page-Blocks
+title: 'Page Blocks'
+---
 
 ## Page `Support`
 
@@ -6,8 +9,11 @@
 
 [Child Page](Child-Page/Child-Page.md)
 
+<br/>
+
 ## Linked Page `Support`
 
 > ☝ Just link to Notion page.
 
 [Linked Page](https://www.notion.so/64c69eaf268a4076bf48d8ee5f2ca8c8)
+
