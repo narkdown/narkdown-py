@@ -12,6 +12,7 @@ class NotionExporter:
         token,
         docs_directory="./docs",
         create_page_directory=True,
+        add_metadata=False,
     ):
         """Initialization of Notion Exporter
 
@@ -31,11 +32,16 @@ class NotionExporter:
         create_page_directory : bool, optional
             Whether or not to create subdirectory with page title.
             Defaults to True.
+
+        add_metadata : boolean, optional
+            Whether or not to add metadata to content.
+            Defaults to False
         """
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
         self.create_page_directory = create_page_directory
+        self.add_metadata = add_metadata
 
     def get_notion_page(self, url, sub_path=""):
         """Get single Notion page to path
@@ -71,10 +77,16 @@ class NotionExporter:
 
         self.image_number = 0
 
-        post = "---\n"
-        post += "id: " + self.filename + "\n"
-        post += "title: '" + page.title + "'\n"
-        post += "---\n\n"
+        post = ""
+
+        if self.add_metadata:
+            post = "---\n"
+            post += "id: " + self.filename + "\n"
+            post += "title: '" + page.title + "'\n"
+            post += "---\n\n"
+        else:
+            post = "# " + page.title + "\n\n"
+
         post = post + self.parse_notion_blocks(page.children, sub_path, "")
 
         write_post(post, full_path, self.filename)
