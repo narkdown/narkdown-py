@@ -13,6 +13,8 @@ class NotionExporter:
         docs_directory="./docs",
         create_page_directory=True,
         add_metadata=False,
+        lower_pathname=False,
+        lower_filename=False,
     ):
         """Initialization of Notion Exporter
 
@@ -36,12 +38,22 @@ class NotionExporter:
         add_metadata : boolean, optional
             Whether or not to add metadata to content.
             Defaults to False
+
+        lower_pathname : boolean, optional
+            Whether or not to make pathname to lowercase.
+            Defaults to False
+
+        lower_filename : boolean, optional
+            Whether or not to make pathname to uppercase.
+            Defaults to False
         """
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
         self.create_page_directory = create_page_directory
         self.add_metadata = add_metadata
+        self.lower_pathname = lower_pathname
+        self.lower_filename = lower_filename
 
     def get_notion_page(
         self,
@@ -77,7 +89,11 @@ class NotionExporter:
             path_set.append(page.title)
 
         sub_path = os.path.join(*path_set).replace(" ", "-")
-        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-").lower()
+        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
+
+        if self.lower_pathname:
+            full_path = full_path.lower()
+
         create_directory(full_path)
 
         self.filename = ""
@@ -94,7 +110,8 @@ class NotionExporter:
         if self.filename[0] == "-":
             self.filename = self.filename[1:]
 
-        self.filename = self.filename.lower()
+        if self.lower_filename:
+            self.filename = self.filename.lower()
 
         self.image_number = 0
 

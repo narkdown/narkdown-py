@@ -33,6 +33,8 @@ if __name__ == "__main__":
         docs_directory="./docs",
         create_page_directory=False,
         add_metadata=True,
+        lower_pathname=True,
+        lower_filename=True,
     ).get_notion_pages_from_database(
         url=database_url,
         category_column_name="Category",
