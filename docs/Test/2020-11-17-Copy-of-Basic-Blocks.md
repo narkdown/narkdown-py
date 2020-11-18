@@ -25,7 +25,7 @@ Also, remember that each page usually has only one title(heading 1).
 
 ---
 
-<br/>
+
 
 ## Text `Support`
 
@@ -61,7 +61,7 @@ This text has background color. `Not Support`
 
 > ✅ This is an example quote. __Quote block with emoji is same with callout block.__
 
-<br/>
+
 
 ## Bulleted list `Support`
 
@@ -83,7 +83,7 @@ This text has background color. `Not Support`
 
    - Bullet item 2-2
 
-<br/>
+
 
 ## Numbered list `Support`
 
@@ -105,7 +105,7 @@ This text has background color. `Not Support`
 
    1. Numbered item 2-2
 
-<br/>
+
 
 ## To-do list `Support`
 
@@ -127,7 +127,7 @@ This text has background color. `Not Support`
 
    - [ ] To-do item 2-2
 
-<br/>
+
 
 ## Toggle list `Support`
 
