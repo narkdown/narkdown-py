@@ -11,6 +11,7 @@ class NotionExporter:
         self,
         token,
         docs_directory="./docs",
+        create_page_directory=True,
     ):
         """Initialization of Notion Exporter
 
@@ -26,12 +27,17 @@ class NotionExporter:
             e.g.
                 "." : root directory.
                 "./docs" : create "docs" folder in root directory.
+
+        create_page_directory : bool, optional
+            Whether or not to create subdirectory with page title.
+            Defaults to True.
         """
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
+        self.create_page_directory = create_page_directory
 
-    def get_notion_page(self, url, sub_path="", create_page_directory=True):
+    def get_notion_page(self, url, sub_path=""):
         """Get single Notion page to path
 
         Arguments
@@ -43,15 +49,11 @@ class NotionExporter:
             Specify where you want to save the file. If you pass parameter,
             then will be created directory under "docs_directory".
             Defaults to empty string.
-
-        create_page_directory : bool, optional
-            Whether or not to create subdirectory with page title.
-            Defaults to True.
         """
         page = self.client.get_block(url)
 
         path_set = [sub_path]
-        if create_page_directory:
+        if self.create_page_directory:
             path_set.append(page.title)
 
         sub_path = os.path.join(*path_set).replace(" ", "-")
@@ -94,7 +96,6 @@ class NotionExporter:
         current_status="",
         next_status="",
         filters={},
-        create_page_directory=True,
     ):
         """Get Notion pages from database to "docs_directory"
 
@@ -127,9 +128,6 @@ class NotionExporter:
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
 
-        create_page_directory : bool, optional
-            Whether or not to create subdirectory with page title.
-            Defaults to True.
         """
         collection = self.client.get_block(url).collection
 
