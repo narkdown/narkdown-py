@@ -43,7 +43,12 @@ class NotionExporter:
         self.create_page_directory = create_page_directory
         self.add_metadata = add_metadata
 
-    def get_notion_page(self, url, sub_path=""):
+    def get_notion_page(
+        self,
+        url,
+        sub_path="",
+        tags=[],
+    ):
         """Get single Notion page to path
 
         Arguments
@@ -55,6 +60,10 @@ class NotionExporter:
             Specify where you want to save the file. If you pass parameter,
             then will be created directory under "docs_directory".
             Defaults to empty string.
+
+        tags : list, optional
+            Add tag meta data to contents.
+            Defaults to empty list.
         """
         page = self.client.get_block(url)
 
@@ -83,6 +92,8 @@ class NotionExporter:
             post = "---\n"
             post += "id: " + self.filename + "\n"
             post += "title: '" + page.title + "'\n"
+            if tags:
+                post += "tags: " + str(tags) + "\n"
             post += "---\n\n"
         else:
             post = "# " + page.title + "\n\n"
@@ -104,6 +115,7 @@ class NotionExporter:
         self,
         url,
         category_column_name="",
+        tags_column_name="",
         status_column_name="",
         current_status="",
         next_status="",
@@ -120,6 +132,12 @@ class NotionExporter:
             In the Notion database, you can categorize content by category with "Select" property.
             If you create a "Select" property in the Notion database and pass the name of the column,
             then folders will be created by category.
+            Defaults to empty string.
+
+        tags_column_name : str, optional
+            In the Notion database, you can tag content with "Multi Select" property. (should set add_metadata to True.)
+            If you create a "Multi Select" property in the Notion database and pass the name of the column,
+            then meta data will be insterted to contents.
             Defaults to empty string.
 
         status_column_name : str, optional
@@ -180,10 +198,14 @@ class NotionExporter:
             if category_column_name and page.get_property(category_column_name):
                 path = page.get_property(category_column_name).replace(" ", "-")
 
+            tags = []
+            if tags_column_name and page.get_property(tags_column_name):
+                tags = page.get_property(tags_column_name)
+
             self.get_notion_page(
                 page.get_browseable_url(),
                 sub_path=path,
-                create_page_directory=create_page_directory,
+                tags=tags,
             )
 
             if next_status:
