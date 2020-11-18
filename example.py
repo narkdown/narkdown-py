@@ -37,9 +37,9 @@ if __name__ == "__main__":
         url=database_url,
         category_column_name="Category",
         tags_column_name="Tags",
+        created_time_column_name="Created Time",
         status_column_name="Status",
         current_status="",
         next_status="",
         filters={},
-        add_date_to_filename=True,
     )

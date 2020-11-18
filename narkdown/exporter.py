@@ -47,7 +47,7 @@ class NotionExporter:
         self,
         url,
         sub_path="",
-        date_str="",
+        created_time="",
         tags=[],
     ):
         """Get single Notion page to path
@@ -62,7 +62,7 @@ class NotionExporter:
             then will be created directory under "docs_directory".
             Defaults to empty string.
 
-        date_str : str, optional
+        created_time : str, optional
             Specify date string before the filename.
             Defaults to empty string.
 
@@ -82,8 +82,8 @@ class NotionExporter:
 
         self.filename = ""
 
-        if date_str:
-            self.filename += date_str + "-"
+        if created_time:
+            self.filename += created_time + "-"
 
         self.filename += re.sub(
             "--+", "-", re.sub(r"[\(\)\{\}\[\]\,\.\/ ]", "-", page.title)
@@ -108,7 +108,9 @@ class NotionExporter:
         else:
             post = "# " + page.title + "\n\n"
 
-        post = post + self.parse_notion_blocks(page.children, sub_path, date_str, "")
+        post = post + self.parse_notion_blocks(
+            page.children, sub_path, created_time, ""
+        )
 
         write_post(post, full_path, self.filename)
 
@@ -126,11 +128,11 @@ class NotionExporter:
         url,
         category_column_name="",
         tags_column_name="",
+        created_time_column_name="",
         status_column_name="",
         current_status="",
         next_status="",
         filters={},
-        add_date_to_filename=False,
     ):
         """Get Notion pages from database to "docs_directory"
 
@@ -151,6 +153,12 @@ class NotionExporter:
             then meta data will be insterted to contents.
             Defaults to empty string.
 
+        created_time_column_name : str, optional
+            In the Notion database, you can manage created time of content with "Created Time" property.
+            If you create a "Created Time" property in the Notion database and pass the name of the column,
+            you can add created time to filename.
+            Defaults to empty string.
+
         status_column_name : str, optional
             In the Notion database, you can manage the status of content with "Select" property.
             If you create a "Select" property in the Notion database and pass the name of the column,
@@ -168,10 +176,6 @@ class NotionExporter:
         filters : dict, optional
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
-
-        add_date_to_filename : boolean, optional
-            Whether or not to add date to filename.
-            Defaults to False
         """
         collection = self.client.get_block(url).collection
 
@@ -216,21 +220,23 @@ class NotionExporter:
             if tags_column_name and page.get_property(tags_column_name):
                 tags = page.get_property(tags_column_name)
 
-            date_str = ""
-            if add_date_to_filename:
-                date_str = page.created_time.strftime("%Y-%m-%d")
+            created_time = ""
+            if created_time_column_name and page.get_property(created_time_column_name):
+                created_time = page.get_property(created_time_column_name).strftime(
+                    "%Y-%m-%d"
+                )
 
             self.get_notion_page(
                 page.get_browseable_url(),
                 sub_path=path,
                 tags=tags,
-                date_str=date_str,
+                created_time=created_time,
             )
 
             if next_status:
                 page.set_property(status_column_name, next_status)
 
-    def parse_notion_blocks(self, blocks, path, date_str, offset):
+    def parse_notion_blocks(self, blocks, path, created_time, offset):
         """Parse Notion blocks
 
         Arguments
@@ -241,8 +247,8 @@ class NotionExporter:
         path : str
             Path where "ChildPage blocks" or "Image blocks" will be stored.
 
-        date_str : str
-            Specify date string before the filename.
+        created_time : str
+            Specify created time string before the filename.
 
         offset : str
             Parameter to support indentation of blocks.
@@ -283,7 +289,9 @@ class NotionExporter:
                     parent_image_number = self.image_number
 
                     self.get_notion_page(
-                        block.get_browseable_url(), sub_path=path, date_str=date_str
+                        block.get_browseable_url(),
+                        sub_path=path,
+                        created_time=created_time,
                     )
                     contents += "[{0}]({1}/{1}.md)".format(
                         block.title, block.title.replace(" ", "-")
@@ -323,12 +331,12 @@ class NotionExporter:
                     continue
                 elif block.type == "toggle":
                     contents += self.parse_notion_blocks(
-                        block.children, path, date_str, offset + "   "
+                        block.children, path, created_time, offset + "   "
                     )
                     contents += offset + "  </details>\n\n"
                 else:
                     contents += self.parse_notion_blocks(
-                        block.children, path, date_str, offset + "   "
+                        block.children, path, created_time, offset + "   "
                     )
 
         return contents
