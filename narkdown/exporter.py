@@ -309,10 +309,7 @@ class NotionExporter:
             elif block.type == "toggle":
                 contents += "- <details><summary>" + block.title + "</summary>"
             elif block.type == "text":
-                if len(block.title) == 0:
-                    contents += "<br/>"
-                else:
-                    contents += block.title
+                contents += block.title
             elif block.type == "collection_view":
                 if block.collection:
                     contents += self.parse_notion_collection(block.collection, offset)
