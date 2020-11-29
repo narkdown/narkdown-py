@@ -19,7 +19,7 @@ if __name__ == "__main__":
         add_metadata=False,
     ).get_notion_page(url=readme_url)
 
-    # # Get directory README.md
+    # Get directory README.md
     NotionExporter(
         token=token,
         docs_directory="./docs",
