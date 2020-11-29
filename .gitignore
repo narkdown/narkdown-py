@@ -140,11 +140,5 @@ cython_debug/
 # Dependency directories
 node_modules/
 
-# IDE
-.vscode/
-
 # config
 config.json
-
-# Mac OS
-.DS_Store
