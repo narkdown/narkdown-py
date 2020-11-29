@@ -2,8 +2,9 @@ import os
 import sys
 import requests
 import re
+from notion.client import NotionClient
+from notion.settings import *
 from .constants import *
-from .notion.client import NotionClient
 
 
 class NotionExporter:
