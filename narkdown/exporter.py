@@ -12,6 +12,7 @@ class NotionExporter:
         self,
         token,
         docs_directory="./docs",
+        recursive_export=True,
         create_page_directory=True,
         add_metadata=False,
         lower_pathname=False,
@@ -32,6 +33,10 @@ class NotionExporter:
             e.g.
                 "." : root directory.
                 "./docs" : create "docs" folder in root directory.
+
+        recursive_export : bool, optional
+            Whether or not to recursively export child page.
+            Defaults to True.
 
         create_page_directory : bool, optional
             Whether or not to create subdirectory with page title.
@@ -56,6 +61,7 @@ class NotionExporter:
         self.token = token
         self.client = NotionClient(token_v2=token)
         self.docs_directory = docs_directory
+        self.recursive_export = recursive_export
         self.create_page_directory = create_page_directory
         self.add_metadata = add_metadata
         self.lower_pathname = lower_pathname
@@ -311,7 +317,10 @@ class NotionExporter:
             elif block.type == "bookmark":
                 contents += "[" + block.title + "](" + block.link + ")"
             elif block.type == "page":
-                if self.client.get_block(block.id).parent == block.parent:
+                if (
+                    self.recursive_export
+                    and self.client.get_block(block.id).parent == block.parent
+                ):
                     filename = self.filename
                     parent_image_number = self.image_number
 
