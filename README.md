@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/narkdown.svg)](https://badge.fury.io/py/narkdown)
 
-![Narkdown-image-0.png](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-0.png)
+![Narkdown-image-0.png](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-0.png)
 
 A tool to use Notion as a Markdown editor.
 
@@ -49,7 +49,7 @@ A tool to use Notion as a Markdown editor.
 
 1. Get `token_v2` cookie from a logged-in browser session on Notion.so.
 
-   ![Narkdown-image-1](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-1.png)
+   ![Narkdown-image-1](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-1.png)
 
 1. Add [`config.json`](https://github.com/younho9/narkdown/blob/main/config.json.example) in root directory
 
@@ -162,7 +162,7 @@ A tool to use Notion as a Markdown editor.
 
   - Create "Select" column and specify category by page.
 
-    ![Narkdown-image-2](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-2.png)
+    ![Narkdown-image-2](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-2.png)
 
   - Pass `category_column_name` to parameter.
 
@@ -177,7 +177,7 @@ A tool to use Notion as a Markdown editor.
 
   - Create "Select" column and specify status of page.
 
-    ![Narkdown-image-3](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-3.png)
+    ![Narkdown-image-3](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-3.png)
 
   - Pass `status_column_name`, `current_status`, `next_status` to parameter.
 
@@ -192,7 +192,7 @@ A tool to use Notion as a Markdown editor.
 
   - After extract page, status will be changed.
 
-    ![Narkdown-image-4](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-4.png)
+    ![Narkdown-image-4](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-4.png)
 
   #### Example : Apply filter
 
@@ -209,7 +209,7 @@ A tool to use Notion as a Markdown editor.
 
   - Register `token_v2` and `url` of page to synchronize in github's secret.
 
-    ![Narkdown-image-5](https://raw.githubusercontent.com/younho9/narkdown/main/images/image-5.png)
+    ![Narkdown-image-5](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-5.png)
 
   - Allow python files to receive arguments.
 
