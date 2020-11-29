@@ -16,6 +16,7 @@ class NotionExporter:
         add_metadata=False,
         lower_pathname=False,
         lower_filename=False,
+        line_break=False,
     ):
         """Initialization of Notion Exporter
 
@@ -47,6 +48,10 @@ class NotionExporter:
         lower_filename : boolean, optional
             Whether or not to make pathname to uppercase.
             Defaults to False
+
+        line_break : boolean, optional
+            Whether or not to convert empty blocks of notion to line break tag(<br />).
+            Defaults to False
         """
         self.token = token
         self.client = NotionClient(token_v2=token)
@@ -55,6 +60,7 @@ class NotionExporter:
         self.add_metadata = add_metadata
         self.lower_pathname = lower_pathname
         self.lower_filename = lower_filename
+        self.line_break = line_break
 
     def get_notion_page(
         self,
@@ -338,14 +344,24 @@ class NotionExporter:
             elif block.type == "toggle":
                 contents += "- <details><summary>" + block.title + "</summary>"
             elif block.type == "text":
-                contents += block.title
+                if block.title:
+                    contents += block.title
+                elif self.line_break:
+                    contents += "<br />"
             elif block.type == "collection_view":
                 if block.collection:
                     contents += self.parse_notion_collection(block.collection, offset)
                 else:
                     block.remove()
 
-            contents += "\n\n"
+            if block.type == "collection_view":
+                contents += "\n"
+            elif block.type != "text":
+                contents += "\n\n"
+            elif block.title:
+                contents += "\n\n"
+            elif self.line_break:
+                contents += "\n\n"
 
             if block.children:
                 if block.type == "page":
