@@ -70,7 +70,7 @@ class NotionExporter:
 
     def get_notion_page(
         self,
-        url,
+        page_url,
         sub_path="",
         created_time="",
         tags=[],
@@ -79,7 +79,7 @@ class NotionExporter:
 
         Arguments
         ---------
-        url : str
+        page_url : str
             URL of the Notion page to extract.
 
         sub_path : str, optional
@@ -95,7 +95,7 @@ class NotionExporter:
             Add tag meta data to contents.
             Defaults to empty list.
         """
-        page = self.client.get_block(url)
+        page = self.client.get_block(page_url)
 
         path_set = [sub_path]
         if self.create_page_directory:
@@ -159,7 +159,7 @@ class NotionExporter:
 
     def get_notion_pages_from_database(
         self,
-        url,
+        database_url,
         category_column_name="",
         tags_column_name="",
         created_time_column_name="",
@@ -172,7 +172,7 @@ class NotionExporter:
 
         Arguments
         ---------
-        url : str
+        database_url : str
             URL of the Notion database to extract.
 
         category_column_name : str, optional
@@ -211,7 +211,7 @@ class NotionExporter:
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
         """
-        collection = self.client.get_block(url).collection
+        collection = self.client.get_block(database_url).collection
 
         if status_column_name:
             try:

@@ -17,7 +17,7 @@ if __name__ == "__main__":
         docs_directory=".",
         create_page_directory=False,
         add_metadata=False,
-    ).get_notion_page(url=readme_url)
+    ).get_notion_page(page_url=readme_url)
 
     # Get directory README.md
     NotionExporter(
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         docs_directory="./docs",
         create_page_directory=False,
         add_metadata=False,
-    ).get_notion_page(url=docs_page_url)
+    ).get_notion_page(page_url=docs_page_url)
 
     # Get all contents from database
     NotionExporter(
@@ -36,7 +36,7 @@ if __name__ == "__main__":
         lower_pathname=True,
         lower_filename=True,
     ).get_notion_pages_from_database(
-        url=database_url,
+        database_url=database_url,
         category_column_name="Category",
         tags_column_name="Tags",
         created_time_column_name="Created Time",
