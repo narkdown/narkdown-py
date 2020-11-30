@@ -105,6 +105,8 @@ class NotionExporter:
         full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
 
         if self.lower_pathname:
+            self.docs_directory = self.docs_directory.lower()
+            sub_path = sub_path.lower()
             full_path = full_path.lower()
 
         create_directory(full_path)
