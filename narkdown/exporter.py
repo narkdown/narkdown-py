@@ -51,7 +51,7 @@ class NotionExporter:
             Defaults to False
 
         lower_filename : boolean, optional
-            Whether or not to make pathname to uppercase.
+            Whether or not to make filename to uppercase.
             Defaults to False
 
         line_break : boolean, optional
