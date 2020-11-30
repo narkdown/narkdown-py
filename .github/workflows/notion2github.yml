@@ -6,10 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v2
 
       - name: Notion2Github
-        uses: younho9/notion2github@v0.0.2-beta
+        uses: younho9/notion2github@v0.0.3-beta
         with:
           database-url: https://www.notion.so/acc3dfd0339e4cacb5baae8673fddfad?v=83b3d2a66f634940987d1142e51da175
 
