@@ -1,8 +1,5 @@
 name: Notion2Github
 on:
-  push:
-    branches:
-      - notion2github-test
   schedule:
     - cron: "0 14 * * *"
 jobs:
@@ -32,11 +29,10 @@ jobs:
           status-column-name: Status
           current-status: ✅ Completed
           next-status: 🖨 Published
-          filters: '{ "Category": "2. Test" }'
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
-      - name: Prettify code
+      - name: Format documents
         uses: creyD/prettier_action@v3.1
         with:
           prettier_options: --write ./docs/**/*.md
