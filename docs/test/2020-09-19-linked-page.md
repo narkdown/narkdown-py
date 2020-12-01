@@ -1,6 +1,6 @@
 ---
 id: 2020-09-19-linked-page
-title: 'Linked Page'
+title: "Linked Page"
 ---
 
 ## Linked page

@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-code-blocks
-title: 'Code Blocks'
+title: "Code Blocks"
 ---
 
 ## Code `Support`
@@ -49,11 +49,11 @@ class HelloWorldApp {
 ### JavaScript
 
 ```javascript
-console.log('Hello World!');
+console.log("Hello World!");
 ```
 
 ### TypeScript
 
 ```typescript
-console.log('Hello World!');
+console.log("Hello World!");
 ```

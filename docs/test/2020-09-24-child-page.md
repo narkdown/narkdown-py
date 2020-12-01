@@ -1,6 +1,6 @@
 ---
 id: 2020-09-24-child-page
-title: 'Child Page'
+title: "Child Page"
 ---
 
 ## Image `Support`

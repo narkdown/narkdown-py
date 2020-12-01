@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-child-page
-title: 'Child Page'
+title: "Child Page"
 ---
 
 ## Hello! I'm child page.

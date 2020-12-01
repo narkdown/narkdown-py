@@ -1,6 +1,6 @@
 ---
 id: 2020-09-24-grandchild-page
-title: 'GrandChild Page'
+title: "GrandChild Page"
 ---
 
 ## Image `Support`

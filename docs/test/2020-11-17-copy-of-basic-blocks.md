@@ -1,6 +1,6 @@
 ---
 id: 2020-11-17-copy-of-basic-blocks
-title: 'Copy of Basic Blocks'
+title: "Copy of Basic Blocks"
 ---
 
 > ⚠️ [Narkdown](https://github.com/younho9/narkdown) is a tool to use Notion as a Markdown editor.

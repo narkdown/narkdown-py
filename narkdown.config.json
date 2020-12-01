@@ -13,7 +13,7 @@
     "tagsColumnName": "Tags",
     "createdTimeColumnName": "Created Time",
     "statusColumnName": "Status",
-    "currentStatus": "✅ Completed",
+    "currentStatus": "✅ Completeds",
     "nextStatus": "🖨 Published",
     "filters": {
       "Category": "Test"

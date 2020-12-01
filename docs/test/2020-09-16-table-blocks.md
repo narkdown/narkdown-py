@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-table-blocks
-title: 'Table Blocks'
+title: "Table Blocks"
 ---
 
 ## Simple Table

@@ -1,6 +1,6 @@
 ---
 id: 2020-09-24-recursive-embed-image
-title: 'Recursive embed Image'
+title: "Recursive embed Image"
 ---
 
 ## Image `Support`

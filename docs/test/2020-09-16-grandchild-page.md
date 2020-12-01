@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-grandchild-page
-title: 'GrandChild Page'
+title: "GrandChild Page"
 ---
 
 ## Hello! I'm grandchild page

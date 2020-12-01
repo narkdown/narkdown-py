@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-page-blocks
-title: 'Page Blocks'
+title: "Page Blocks"
 ---
 
 ## Page `Support`

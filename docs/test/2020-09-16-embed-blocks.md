@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-embed-blocks
-title: 'Embed Blocks'
+title: "Embed Blocks"
 ---
 
 ## Image `Support`
