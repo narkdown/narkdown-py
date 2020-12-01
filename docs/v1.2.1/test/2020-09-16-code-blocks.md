@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-code-blocks
-title: "Code Blocks"
+title: 'Code Blocks'
 ---
 
 ## Code `Support`
@@ -57,3 +57,4 @@ console.log("Hello World!");
 ```typescript
 console.log("Hello World!");
 ```
+

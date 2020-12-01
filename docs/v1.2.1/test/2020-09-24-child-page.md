@@ -1,6 +1,6 @@
 ---
 id: 2020-09-24-child-page
-title: "Child Page"
+title: 'Child Page'
 ---
 
 ## Image `Support`
@@ -16,3 +16,4 @@ title: "Child Page"
 ![2020-09-24-child-page-image-2](images/2020-09-24-child-page-image-2.jpeg)
 
 ![2020-09-24-child-page-image-3](images/2020-09-24-child-page-image-3.jpeg)
+

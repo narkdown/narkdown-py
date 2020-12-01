@@ -1,6 +1,6 @@
 ---
 id: 2020-09-16-page-blocks
-title: "Page Blocks"
+title: 'Page Blocks'
 ---
 
 ## Page `Support`
@@ -14,3 +14,4 @@ title: "Page Blocks"
 > ☝ Just link to Notion page.
 
 [Linked Page](https://www.notion.so/64c69eaf268a4076bf48d8ee5f2ca8c8)
+

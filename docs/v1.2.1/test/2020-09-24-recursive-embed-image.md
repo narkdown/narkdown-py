@@ -1,6 +1,6 @@
 ---
 id: 2020-09-24-recursive-embed-image
-title: "Recursive embed Image"
+title: 'Recursive embed Image'
 ---
 
 ## Image `Support`
@@ -16,3 +16,4 @@ title: "Recursive embed Image"
 ![2020-09-24-recursive-embed-image-image-2](images/2020-09-24-recursive-embed-image-image-2.jpeg)
 
 ![2020-09-24-recursive-embed-image-image-3](images/2020-09-24-recursive-embed-image-image-3.jpeg)
+
