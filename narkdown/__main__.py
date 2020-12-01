@@ -16,15 +16,10 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_config(filename):
-    with open(filename, "r") as f:
-        return convertJSON(json.load(f))
-
-
 if __name__ == "__main__":
     args = parse_args()
 
-    config = load_config(CONFIG_FILENAME) if os.path.isfile(CONFIG_FILENAME) else {}
+    config = load_json(CONFIG_FILENAME) if os.path.isfile(CONFIG_FILENAME) else {}
     config = {}
     export_config = config.get("export_config") or {}
     database_config = config.get("database_config") or {}

@@ -30,3 +30,8 @@ def convertJSON(j):
         else:
             out[newK] = j[k]
     return out
+
+
+def load_json(filename):
+    with open(filename, "r") as f:
+        return convertJSON(json.load(f))
