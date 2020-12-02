@@ -1,7 +1,6 @@
-<h1 align="left">
-  <a href="https://www.notion.so/Narkdown-4db9629e512f43efbba98000a5c2e381"><img src="https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/logo.png" alt="Narkdown" width="120px"></a>
-  <p>Narkdown</p>
-</h1>
+<a align="left" href="https://www.notion.so/Narkdown-4db9629e512f43efbba98000a5c2e381"><img src="docs/images/logo.png" alt="Narkdown" width="120px"></a>
+
+# Narkdown
 
 <p align="left">
   <img alt="PyPI" src="https://img.shields.io/pypi/v/narkdown?style=flat-square">
@@ -21,237 +20,120 @@
 
 ---
 
+## Installation
+
+```bash
+pip install narkdown
+# pip3 install narkdown
+```
+
+## Usage
+
+> ⚠️ **NOTE:** the latest version of narkdown requires Python 3.5 or greater.
+
+### Quick Start
+
+#### CLI
+
+![narkdown-image-0](docs/images/readme-image-0.png)
+
+[How To Find Your Notion v2 Token - Red Gregory](https://www.redgregory.com/notion/2020/6/15/9zuzav95gwzwewdu1dspweqbv481s5)
+
+#### Python
+
+[`example.py`](https://github.com/younho9/narkdown/blob/main/example.py)
+
+![narkdown-image-1](docs/images/readme-image-1.png)
+
+```bash
+python3 example.py
+```
+
+#### Database template page for test
+
+Here is an [database template page](https://www.notion.so/acc3dfd0339e4cacb5baae8673fddfad?v=be43c1c8dd644cfb9df9efd97d8af60a) for importing pages from the database. Move to that page, duplicate it, and test it.
+
+<div align="center">
+    <img width="70%" src="docs/images/readme-image-2.png" alt="narkdown-image-2">
+</div>
+
 ## Features
 
-- **Auto synchronization of Notion to Github by using Github Actions and crontab.**
+- **Import page from Notion and save it to the desired path.**
 
-- **Format documents by using Prettier.**
+- **Import database from Notion and save pages to the desired path.**
 
-- **Import a Notion page and save it to the desired path.**
-
-  Useful for simple markdown exporter.
-
-- **Import Notion pages from database to the desired path.**
-
-  Useful for CMS(Contents Manage System) of static pages such as blog or docs page.
+  - Useful for CMS(Contents Manage System) of static pages such as blog or docs page.
 
   - Support import by status of content.
 
   - Support filter contents.
 
-- **Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link.**
+- **Import** **_child page_** **in Notion page recursively. And import** **_linked page_** **as a Notion page link.**
 
 - **Support nested block. (e.g. bulleted, numbered, to-do, toggle)**
 
-- **Support syntax highlighting in code block.**
+- **Support language selection of code block.**
 
-## Usage
+## Configuring Narkdown
 
-### Quickstart
+Narkdown provides some configuration for how to extract documents. You can configure Narkdown via `narkdown.config.json` .
 
-> ⚠️ **_NOTE:_** the latest version of narkdown requires Python 3.5 or greater.
+Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 
-1. Install dependencies
-
-   `pip install narkdown`
-
-1. Get `token_v2` cookie from a logged-in browser session on Notion.so.
-
-   ![Narkdown-image-1](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-1.png)
-
-1. Add [`config.json`](https://github.com/younho9/narkdown/blob/main/config.json.example) in root directory
-
-   ```json
-   {
-       "TOKEN":
-       "DATABASE_URL":
-       "PAGE1_URL":
-       "PAGE2_URL":
-       "PAGE3_URL":
-       "PAGE4_URL":
-       // and so on ...
-   }
-   ```
-
-1. Use it like an [`example.py`](https://github.com/younho9/narkdown/blob/main/example.py)
-
-   ```python
-   import sys
-   import json
-   from narkdown.exporter import NotionExporter
-
-   if __name__ == "__main__":
-       with open("config.json", "r") as f:
-           config = json.load(f)
-
-       token = config["TOKEN"]
-       readme_url = config["README_URL"]
-       docs_page_url = config["DOCS_PAGE_URL"]
-       database_url = config["DATABASE_URL"]
-
-       # Get project README.md
-       NotionExporter(token, ".").get_notion_page(
-           url=readme_url, create_page_directory=False
-       )
-
-       # Get directory README.md
-       NotionExporter(token, "./docs").get_notion_page(
-           url=docs_page_url, create_page_directory=False
-       )
-
-       # Get all contents from database
-       NotionExporter(token).get_notion_pages_from_database(
-           url=database_url,
-           category_column_name="Category",
-           status_column_name="Status",
-           current_status="",
-           next_status="",
-           filters={},
-       )
-   ```
-
-### Format Documents
-
-- Create `package.json` file to your document directory.
-
-  - Example
-
-  ```json
-  {
-    "name": "narkdown-docs",
-    "dependencies": {
-      "prettier": "2.1.1"
-    },
-    "scripts": {
-      "format": "prettier --write ."
-    },
-    "author": "younho9",
-    "license": "MIT"
+```json
+// narkdown.config.json
+{
+  "exportConfig": {
+    "recursiveExport": true,
+    "createPageDirectory": true,
+    "addMetadata": false,
+    "lowerPathname": false,
+    "lowerFilename": false,
+    "lineBreak": false
+  },
+  "databaseConfig": {
+    "categoryColumnName": "Category",
+    "tagsColumnName": "Tags",
+    "createdTimeColumnName": "Created Time",
+    "statusColumnName": "Status",
+    "currentStatus": "✅ Completed",
+    "nextStatus": "🖨 Published"
   }
-  ```
+}
+```
 
-- Install dependencies
+| Name                  | Description                                                                      | Default |
+| --------------------- | -------------------------------------------------------------------------------- | ------- |
+| `recursiveExport`     | Whether or not to recursively export child page.                                 | `true`  |
+| `createPageDirectory` | Whether or not to create subdirectory with page title.                           | `true`  |
+| `addMetadata`         | Whether or not to add metadata to content.                                       | `false` |
+| `lowerPathname`       | Whether or not to make pathname to lowercase.                                    | `false` |
+| `lowerFilename`       | Whether or not to make filename to uppercase.                                    | `false` |
+| `lineBreak`           | Whether or not to convert empty blocks of notion to line break tag. ( `<br />` ) | `false` |
 
-  ```bash
-  cd docs # your documents directory
-  npm install
-  ```
+| Name                    | Description                                                                                                                                                                                                                                                                                                                       | Default |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `categoryColumnName`    | In Notion database, content can be classified by category by `select` property. When you create the `select` property in the Notion database and pass the name of the column, folders are created by category.                                                                                                                    | `""`    |
+| `tagsColumnName`        | In the Notion database, you can tag content with `Multi Select` property. If you create a `Multi Select` property in the Notion database and pass the name of the column, then meta data will be insterted to contents. (should set `addMetadata` to True.)                                                                       | `""`    |
+| `createdTimeColumnName` | In the Notion database, you can manage created time of content with `Created Time` property. If you create a `Created Time` property in the Notion database and pass the name of the column, you can add created time to filename. (e.g. `2020-12-02-some-title.md` )                                                             | `""`    |
+| `statusColumnName`      | In the Notion database, you can manage the status of content with `Select` property. If you create a `Select` property in the Notion database and pass the name of the column, you can import contents in a specific state or change the status of the content. (should be used with the `currentStatus` or `nextStatus` option.) | `""`    |
+| `currentStatus`         | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | `""`    |
+| `nextStatus`            | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | `""`    |
 
-- Add prettier setting
+#### Set env variable for token_v2
 
-  `.prettierrc` (example)
+The token_v2 of notion is a variable that should not be shared. You can use os environment variable for notion token.
 
-  ```json
-  {
-    "printWidth": 100,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "bracketSpacing": true,
-    "semi": true,
-    "useTabs": false,
-    "arrowParens": "avoid",
-    "endOfLine": "lf"
-  }
-  ```
+Narkdown use the `NOTION_TOKEN` as an environment variable for token_v2. Setting this environment variable allow the CLI to omit token_v2 input.
 
-- Using npm scripts
+## Advanced
 
-  ```bash
-  cd docs # your documents directory
-  npm run format
-  ```
+### [Notion2Github](https://github.com/younho9/notion2github)
 
-### Examples
-
-- <details><summary>Click here.</summary>
-
-  #### Example : Categorize content by "Select" property.
-
-  - Create "Select" column and specify category by page.
-
-    ![Narkdown-image-2](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-2.png)
-
-  - Pass `category_column_name` to parameter.
-
-    ```python
-    NotionExporter(token).get_notion_pages_from_database(
-        url=database_url,
-        category_column_name="Category"
-    )
-    ```
-
-  #### Example : Get content by status.
-
-  - Create "Select" column and specify status of page.
-
-    ![Narkdown-image-3](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-3.png)
-
-  - Pass `status_column_name`, `current_status`, `next_status` to parameter.
-
-    ```python
-    NotionExporter(token).get_notion_pages_from_database(
-        url=database_url,
-        status_column_name="Status",
-        current_status="✅ Completed",
-        next_status="🖨 Published"
-    )
-    ```
-
-  - After extract page, status will be changed.
-
-    ![Narkdown-image-4](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-4.png)
-
-  #### Example : Apply filter
-
-  - Pass key, value pair of filter list to `filters` parameter.
-
-    ```python
-    NotionExporter(token).get_notion_pages_from_database(
-        url=database_url,
-        filter={"Name" : "Basic Blocks"}
-    )
-    ```
-
-  #### Example : Auto synchronization of Notion and Github
-
-  - Register `token_v2` and `url` of page to synchronize in github's secret.
-
-    ![Narkdown-image-5](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-5.png)
-
-  - Allow python files to receive arguments.
-
-    ```python
-    # auto_sync.py
-
-    import sys
-    from narkdown.exporter import NotionExporter
-
-    if __name__ == "__main__":
-        token = sys.argv[1]
-        database_url = sys.argv[2]
-
-        """
-        Get contents from the database that is in the "✅ Completed" state,
-        and update it to the "🖨 Published" state.
-        """
-        NotionExporter(token).get_notion_pages_from_database(
-            url=database_url,
-            category_column_name="Category",
-            status_column_name="Status",
-            current_status="✅ Completed",
-            next_status="🖨 Published",
-            filters={},
-        )
-    ```
-
-  - [Create github actions workflow file](https://github.com/younho9/narkdown/blob/main/.github/workflows/auto-sync.yml) to `.github/workflows`
-
-  </details>
+Github action to synchronize the content of the notion database with github.
 
 ## Supported Blocks
-
-[View supported blocks by type](https://bit.ly/32PzfpT)
 
 | Block Type           | Supported  | Notes                                                                                           |
 | -------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
