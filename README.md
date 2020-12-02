@@ -1,15 +1,23 @@
-# Narkdown
+<h1 align="left">
+  <a href="https://www.notion.so/Narkdown-4db9629e512f43efbba98000a5c2e381"><img src="https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/logo.png" alt="Narkdown" width="120px"></a>
+  <p>Narkdown</p>
+</h1>
 
-[![PyPI version](https://badge.fury.io/py/narkdown.svg)](https://badge.fury.io/py/narkdown)
+<p align="left">
+  <img alt="PyPI" src="https://img.shields.io/pypi/v/narkdown?style=flat-square">
+  <img alt="PyPi - Python Version" src="https://img.shields.io/pypi/pyversions/narkdown?style=flat-square">
+  <a href="https://github.com/psf/black"><img alt="code style: black" src="https://img.shields.io/static/v1?label=code%20style&message=black&color=black&style=flat-square"></a>
+  <img alt="PyPI - License" src="https://img.shields.io/pypi/l/narkdown?style=flat-square">
+</p>
 
-![Narkdown-image-0.png](https://raw.githubusercontent.com/younho9/narkdown/main/docs/images/readme-image-0.png)
-
-A tool to use Notion as a Markdown editor.
+<p align="left">
+  <strong>A tool to use Notion as a Markdown editor.</strong>
+</p>
 
 ---
 
-> ⚠️ **_NOTE:_** Narkdown uses customized version of [notion-py](https://github.com/jamalex/notion-py) created by [Jamie Alexandre](https://github.com/jamalex). That repository seems to be abandoned.
-> Also, this is based on the private Notion API. It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
+> ⚠️ **NOTE:** Narkdown is dependent on [notion-py](https://github.com/jamalex/notion-py), the **_unofficial_** Notion API created by [Jamie Alexandre](https://github.com/jamalex).
+> It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
 
 ---
 
