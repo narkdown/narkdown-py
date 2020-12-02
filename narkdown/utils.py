@@ -43,7 +43,8 @@ def str_to_json(s):
 
 def inputWithDefault(message, default):
     value = input(f"{message} (default: {default}): ")
-    if value.isspace():
+
+    if not value.strip():
         return default
     else:
         return value
