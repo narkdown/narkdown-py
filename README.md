@@ -127,7 +127,7 @@ Narkdown use the `NOTION_TOKEN` as an environment variable for token_v2. Setting
 
 ## Advanced
 
-### [Notion2Github](https://github.com/younho9/notion2github)
+### [Notion2Github](https://github.com/younho9/notion2github) `recommended`
 
 Github action to synchronize the content of the notion database with github.
 
