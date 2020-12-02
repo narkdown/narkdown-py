@@ -1,6 +1,5 @@
 {
   "exportConfig": {
-    "docsDirectory": "./docs",
     "recursiveExport": true,
     "createPageDirectory": false,
     "addMetadata": true,
@@ -14,9 +13,6 @@
     "createdTimeColumnName": "Created Time",
     "statusColumnName": "Status",
     "currentStatus": "✅ Completeds",
-    "nextStatus": "🖨 Published",
-    "filters": {
-      "Category": "Test"
-    }
+    "nextStatus": "🖨 Published"
   }
 }
