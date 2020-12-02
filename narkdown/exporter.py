@@ -176,35 +176,34 @@ class NotionExporter:
             URL of the Notion database to extract.
 
         category_column_name : str, optional
-            In the Notion database, you can categorize content by category with "Select" property.
-            If you create a "Select" property in the Notion database and pass the name of the column,
-            then folders will be created by category.
+            In Notion database, content can be classified by category by select property.
+            When you create the select property in the Notion database and pass the name of the column, folders are created by category.
             Defaults to empty string.
 
         tags_column_name : str, optional
-            In the Notion database, you can tag content with "Multi Select" property. (should set add_metadata to True.)
+            In the Notion database, you can tag content with "Multi Select" property.
             If you create a "Multi Select" property in the Notion database and pass the name of the column,
-            then meta data will be insterted to contents.
+            then meta data will be insterted to contents. (should set add_metadata to True.)
             Defaults to empty string.
 
         created_time_column_name : str, optional
             In the Notion database, you can manage created time of content with "Created Time" property.
             If you create a "Created Time" property in the Notion database and pass the name of the column,
-            you can add created time to filename.
+            you can add created time to filename. (e.g. 2020-12-02-some-title.md)
             Defaults to empty string.
 
         status_column_name : str, optional
             In the Notion database, you can manage the status of content with "Select" property.
             If you create a "Select" property in the Notion database and pass the name of the column,
-            you can import contents in a specific state or change the status of the content.
+            you can import contents in a specific state or change the status of the content. (should be used with the current_status or next_status option.)
             Defaults to empty string.
 
         current_status : str, optional
-            Status of content to import. Must be an option in the "status_column_name" column.
+            Import only the content that corresponds to current_status value. ( status_column_name must be set.)
             Defaults to empty string.
 
         next_status : str, optional
-            Status of contents after content was imported. Must be an option in the "status_column_name" column.
+            Changes content status to next_status value after import. ( status_column_name must be set.)
             Defaults to empty string.
 
         filters : dict, optional

@@ -38,13 +38,13 @@ def load_json(filename):
 
 
 def str_to_json(s):
-    return json.loads(s.replace("'", "\""))
+    return json.loads(s.replace("'", '"'))
 
 
 def inputWithDefault(message, default):
     value = input(f"{message} (default: {default}): ")
-    if value.isspace():
+
+    if not value.strip():
         return default
     else:
         return value
-
