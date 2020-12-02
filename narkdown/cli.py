@@ -12,7 +12,8 @@ def parse_args():
     parser.add_argument("-t", "--token-v2")
     parser.add_argument("-u", "--url")
     parser.add_argument("-d", "--docs-directory")
-    parser.add_argument("-f", "--filters", default="{}")
+    parser.add_argument("-fp", "--filter-prop")
+    parser.add_argument("-fv", "--filter-value")
     parser.add_argument("-i", "--is-database", action="store_true", default=False)
 
     return parser.parse_args()
@@ -22,7 +23,7 @@ def validate_args(args):
     token_v2 = args.token_v2 or os.environ.get(TOKEN_NAME)
     url = args.url
     docs_directory = args.docs_directory
-    filters = str_to_json(args.filters)
+    filters = {}
     is_database = args.is_database
 
     if not token_v2:
@@ -35,6 +36,8 @@ def validate_args(args):
         is_database = (
             inputWithDefault("Is this notion database page? (y/n)", "n") == "y"
         )
+    if args.filter_prop and args.filter_value:
+        filters.update({args.filter_prop: args.filter_value})
 
     return token_v2, url, docs_directory, filters, is_database
 
