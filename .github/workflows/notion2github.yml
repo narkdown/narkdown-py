@@ -1,8 +1,5 @@
 name: Notion2Github
 on:
-  push:
-    branch:
-      - test/notion2github@v1.0.0-beta
   schedule:
     - cron: '0 14 * * *'
 jobs:
@@ -16,7 +13,7 @@ jobs:
         uses: younho9/notion2github@v1.0.0-beta
         with:
           database-url: https://www.notion.so/acc3dfd0339e4cacb5baae8673fddfad
-          docs-directory: docs/v1.0.0-beta
+          docs-directory: docs
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
