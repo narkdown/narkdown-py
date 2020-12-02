@@ -35,3 +35,16 @@ def convertJSON(j):
 def load_json(filename):
     with open(filename, "r") as f:
         return convertJSON(json.load(f))
+
+
+def str_to_json(s):
+    return json.loads(s.replace("'", "\""))
+
+
+def inputWithDefault(message, default):
+    value = input(f"{message} (default: {default}): ")
+    if value.isspace():
+        return default
+    else:
+        return value
+

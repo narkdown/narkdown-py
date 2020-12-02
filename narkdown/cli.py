@@ -21,16 +21,22 @@ def parse_args():
 def validate_args(args):
     token_v2 = args.token_v2 or os.environ.get(TOKEN_NAME)
     url = args.url
+    docs_directory = args.docs_directory
+    filters = str_to_json(args.filters)
     is_database = args.is_database
 
     if not token_v2:
         token_v2 = input("Enter notion token_v2: ")
     if not url:
         url = input("Enter notion url: ")
+    if not docs_directory:
+        docs_directory = inputWithDefault("Enter target directory?", "./docs")
     if not is_database:
-        is_database = input("Is this notion database page? (y/n): ") == "y"
+        is_database = (
+            inputWithDefault("Is this notion database page? (y/n)", "n") == "y"
+        )
 
-    return token_v2, url, is_database
+    return token_v2, url, docs_directory, filters, is_database
 
 
 def get_config():
@@ -42,8 +48,11 @@ def get_config():
 
 
 def main():
-    token_v2, url, is_database = validate_args(parse_args())
+    token_v2, url, docs_directory, filters, is_database = validate_args(parse_args())
     export_config, database_config = get_config()
+
+    export_config.update({"docs_directory": docs_directory})
+    database_config.update({"filters": filters})
 
     exporter = NotionExporter(token=token_v2, **export_config)
 
