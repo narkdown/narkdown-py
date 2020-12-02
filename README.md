@@ -9,9 +9,7 @@
   <img alt="PyPI - License" src="https://img.shields.io/pypi/l/narkdown?style=flat-square">
 </p>
 
-<p align="left">
-  <strong>A tool to use Notion as a Markdown editor.</strong>
-</p>
+**A tool to use Notion as a Markdown editor.**
 
 ---
 
