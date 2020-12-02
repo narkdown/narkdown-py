@@ -11,7 +11,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Get contents from notion.")
     parser.add_argument("-t", "--token-v2")
     parser.add_argument("-u", "--url")
-    parser.add_argument("-d", "--is-database", action="store_true", default=False)
+    parser.add_argument("-d", "--docs-directory")
+    parser.add_argument("-f", "--filters", default="{}")
+    parser.add_argument("-i", "--is-database", action="store_true", default=False)
 
     return parser.parse_args()
 
