@@ -38,7 +38,7 @@ def load_json(filename):
 
 
 def str_to_json(s):
-    return json.loads(s.replace("'", "\""))
+    return json.loads(s.replace("'", '"'))
 
 
 def inputWithDefault(message, default):
@@ -48,4 +48,3 @@ def inputWithDefault(message, default):
         return default
     else:
         return value
-
