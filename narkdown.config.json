@@ -12,7 +12,7 @@
     "tagsColumnName": "Tags",
     "createdTimeColumnName": "Created Time",
     "statusColumnName": "Status",
-    "currentStatus": "✅ Completeds",
+    "currentStatus": "✅ Completed",
     "nextStatus": "🖨 Published"
   }
 }
