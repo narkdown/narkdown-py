@@ -330,9 +330,14 @@ class NotionExporter:
                         sub_path=path,
                         created_time=created_time,
                     )
-                    contents += "[{0}]({1}/{1}.md)".format(
-                        block.title, block.title.replace(" ", "-")
-                    )
+                    if self.create_page_directory: 
+                      contents += "[{0}]({1}/{1}.md)".format(
+                          block.title, block.title.replace(" ", "-")
+                      )
+                    else:
+                      contents += "[{0}](./{1}.md)".format(
+                          block.title, block.title.replace(" ", "-")
+                      )
                     self.filename = filename
                     self.image_number = parent_image_number
                 else:
