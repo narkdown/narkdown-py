@@ -9,12 +9,13 @@
   <img alt="PyPI - License" src="https://img.shields.io/pypi/l/narkdown?style=flat-square">
 </p>
 
+| [English](/README.md) | [한국어](/docs/README.ko.md) |
+
 **A tool to use Notion as a Markdown editor.**
 
 ---
 
-> ⚠️ **NOTE:** Narkdown is dependent on [notion-py](https://github.com/jamalex/notion-py), the **_unofficial_** Notion API created by [Jamie Alexandre](https://github.com/jamalex).
-> It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
+> ⚠️ **NOTE:** Narkdown is dependent on [notion-py](https://github.com/jamalex/notion-py), the **_unofficial_** Notion API created by [Jamie Alexandre](https://github.com/jamalex). It can not gurantee it will stay stable. If you need to use in production, I recommend waiting for their official release.
 
 ---
 
@@ -101,18 +102,14 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 }
 ```
 
-### Export Config
-
 | Name                  | Description                                                                      | Default |
 | --------------------- | -------------------------------------------------------------------------------- | ------- |
 | `recursiveExport`     | Whether or not to recursively export child page.                                 | `true`  |
-| `createPageDirectory` | Whether or not to create subdirectory with page title.                           | `true`  |
+| `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.          | `true`  |
 | `addMetadata`         | Whether or not to add metadata to content.                                       | `false` |
 | `lowerPathname`       | Whether or not to make pathname to lowercase.                                    | `false` |
-| `lowerFilename`       | Whether or not to make filename to uppercase.                                    | `false` |
+| `lowerFilename`       | Whether or not to make filename to lowercase.                                    | `false` |
 | `lineBreak`           | Whether or not to convert empty blocks of notion to line break tag. ( `<br />` ) | `false` |
-
-### Database Config
 
 | Name                    | Description                                                                                                                                                                                                                                                                                                                       | Default |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -123,11 +120,11 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 | `currentStatus`         | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | `""`    |
 | `nextStatus`            | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | `""`    |
 
-### Set env variable for token_v2
+#### Set env variable for `token_v2`
 
-The token_v2 of notion is a variable that should not be shared. You can use os environment variable for notion token.
+The `token_v2` of notion is a variable that should not be shared. You can use os environment variable for notion token.
 
-Narkdown use the `NOTION_TOKEN` as an environment variable for token_v2. Setting this environment variable allow the CLI to omit token_v2 input.
+Narkdown use the `NOTION_TOKEN` as an environment variable for `token_v2`. Setting this environment variable allow the CLI to omit `token_v2` input.
 
 ## Advanced
 
@@ -139,9 +136,9 @@ Github action to synchronize the content of the notion database with github.
 
 | Block Type           | Supported  | Notes                                                                                           |
 | -------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
-| Heading 1            | ✅ Yes     | [Converted to heading 2 in markdown.](https://bit.ly/3hEM8ak)                                   |
-| Heading 2            | ✅ Yes     | [Converted to heading 3 in markdown.](https://bit.ly/3hEM8ak)                                   |
-| Heading 3            | ✅ Yes     | [Converted to heading 4 in markdown.](https://bit.ly/3hEM8ak)                                   |
+| Heading 1            | ✅ Yes     | [Converted to heading 2 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
+| Heading 2            | ✅ Yes     | [Converted to heading 3 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
+| Heading 3            | ✅ Yes     | [Converted to heading 4 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
 | Text                 | ✅ Yes     |                                                                                                 |
 | Divider              | ✅ Yes     | Divider after the Heading 1 is not added.                                                       |
 | Callout              | ✅ Yes     | Callout block will be exported as quote block with emoji.                                       |
