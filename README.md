@@ -102,6 +102,8 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 }
 ```
 
+### Export Config
+
 | Name                  | Description                                                                      | Default |
 | --------------------- | -------------------------------------------------------------------------------- | ------- |
 | `recursiveExport`     | Whether or not to recursively export child page.                                 | `true`  |
@@ -110,6 +112,8 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 | `lowerPathname`       | Whether or not to make pathname to lowercase.                                    | `false` |
 | `lowerFilename`       | Whether or not to make filename to lowercase.                                    | `false` |
 | `lineBreak`           | Whether or not to convert empty blocks of notion to line break tag. ( `<br />` ) | `false` |
+
+### Database Config
 
 | Name                    | Description                                                                                                                                                                                                                                                                                                                       | Default |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -120,7 +124,7 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 | `currentStatus`         | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | `""`    |
 | `nextStatus`            | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | `""`    |
 
-#### Set env variable for `token_v2`
+### Set env variable for `token_v2`
 
 The `token_v2` of notion is a variable that should not be shared. You can use os environment variable for notion token.
 
