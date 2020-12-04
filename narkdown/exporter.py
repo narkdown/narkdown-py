@@ -507,5 +507,5 @@ def create_directory(path):
 
 
 def write_post(post, path, title):
-    file = open(path + "/" + title + ".md", "w")
-    file.write(post)
+    with open(path + "/" + title + ".md", "w", encoding="utf-8") as f:
+        f.write(post)
