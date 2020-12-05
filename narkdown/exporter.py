@@ -1,12 +1,11 @@
 import os
-import sys
 import requests
 import re
 from notion.client import NotionClient
 from notion.settings import *
 from .constants import *
 
-
+LOGN_PATH_PREFIX = '\\\\?\\'
 class NotionExporter:
     def __init__(
         self,
@@ -96,6 +95,7 @@ class NotionExporter:
             Defaults to empty list.
         """
         page = self.client.get_block(page_url)
+        page.title = page.title.strip()
 
         path_set = [sub_path]
         if self.create_page_directory:
@@ -120,10 +120,11 @@ class NotionExporter:
             "--+", "-", re.sub(r"[\(\)\{\}\[\]\,\.\/ ]", "-", page.title)
         )
 
-        if self.filename[-1] == "-":
-            self.filename = self.filename[:-1]
-        if self.filename[0] == "-":
-            self.filename = self.filename[1:]
+        if len(self.filename) > 0:
+            if self.filename[-1] == "-":
+                self.filename = self.filename[:-1]
+            if self.filename[0] == "-":
+                self.filename = self.filename[1:]
 
         if self.lower_filename:
             self.filename = self.filename.lower()
@@ -165,6 +166,7 @@ class NotionExporter:
         created_time_column_name="",
         status_column_name="",
         current_status="",
+        sub_path="",
         next_status="",
         filters={},
     ):
@@ -202,6 +204,11 @@ class NotionExporter:
             Import only the content that corresponds to current_status value. ( status_column_name must be set.)
             Defaults to empty string.
 
+        sub_path : str, optional
+            Specify where you want to save the file. If you pass parameter,
+            then will be created directory under "docs_directory".
+            Defaults to empty string.
+
         next_status : str, optional
             Changes content status to next_status value after import. ( status_column_name must be set.)
             Defaults to empty string.
@@ -210,7 +217,23 @@ class NotionExporter:
             Key, value pair of filter list to apply to the Notion database.
             Defaults to empty dict.
         """
-        collection = self.client.get_block(database_url).collection
+        collection_view = self.client.get_block(database_url)
+        collection = collection_view.collection
+        collection_view.title = collection_view.title.strip()
+
+        path_set = [sub_path]
+        if self.create_page_directory:
+            path_set.append(collection_view.title)
+
+        sub_path = os.path.join(*path_set).replace(" ", "-")
+        full_path = os.path.join(self.docs_directory, sub_path).replace(" ", "-")
+
+        if self.lower_pathname:
+            self.docs_directory = self.docs_directory.lower()
+            sub_path = sub_path.lower()
+            full_path = full_path.lower()
+
+        create_directory(full_path)
 
         if status_column_name:
             try:
@@ -249,6 +272,7 @@ class NotionExporter:
             if category_column_name and page.get_property(category_column_name):
                 path = page.get_property(category_column_name).replace(" ", "-")
                 path = re.sub("--+", "-", re.sub(r"[\(\)\{\}\[\]\,\.\/ ]", "-", path))
+                path = os.path.join(sub_path, path).replace(" ", "-")
 
             tags = []
             if tags_column_name and page.get_property(tags_column_name):
@@ -262,7 +286,7 @@ class NotionExporter:
 
             self.get_notion_page(
                 page.get_browseable_url(),
-                sub_path=path,
+                sub_path=sub_path,
                 tags=tags,
                 created_time=created_time,
             )
@@ -374,10 +398,42 @@ class NotionExporter:
                 elif self.line_break:
                     contents += "<br />"
             elif block.type == "collection_view":
-                if block.collection:
-                    contents += self.parse_notion_collection(block.collection, offset)
+                if (
+                    self.recursive_export
+                    and self.client.get_block(block.id).parent == block.parent
+                ):
+                    filename = self.filename
+                    parent_image_number = self.image_number
+
+                    self.get_notion_pages_from_database(
+                        block.get_browseable_url(),
+                        sub_path=path
+                    )
+
+                    child_title = block.title.replace(" ", "-")
+                    child_pathname = (
+                        child_title.lower() if self.lower_pathname else child_title
+                    )
+
+                    child_filename = (
+                        child_title.lower() if self.lower_filename else child_title
+                    )
+
+                    if self.create_page_directory:
+                        contents += "[{0}]({1}/{2}.md)".format(
+                            block.title, child_pathname, child_filename
+                        )
+                    else:
+                        contents += "[{0}](./{1}.md)".format(
+                            block.title, child_filename
+                        )
+                    self.filename = filename
+                    self.image_number = parent_image_number
                 else:
-                    block.remove()
+                    if block.collection:
+                        contents += self.parse_notion_collection(block.collection, offset)
+                    else:
+                        block.remove()
 
             if block.type == "collection_view":
                 contents += "\n"
@@ -499,7 +555,7 @@ class NotionExporter:
 
 
 def create_directory(path):
-    if not (os.path.isdir(path)):
+    if not (os.path.isdir(f"{LOGN_PATH_PREFIX}{path}")):
         try:
             os.makedirs(path)
         except:
