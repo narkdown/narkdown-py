@@ -1,4 +1,5 @@
 import os
+import platform
 import requests
 import re
 from notion.client import NotionClient
@@ -6,7 +7,7 @@ from notion.settings import *
 from .constants import *
 
 
-LOGN_PATH_PREFIX = '\\\\?\\'
+WIN_LOGN_PATH_PREFIX = '\\\\?\\'
 
 
 class NotionExporter:
@@ -558,7 +559,10 @@ class NotionExporter:
 
 
 def create_directory(path):
-    if not (os.path.isdir(f"{LOGN_PATH_PREFIX}{path}")):
+    if platform.system() == 'Windows':
+        path = os.path.abspath(path)
+        path = f"{WIN_LOGN_PATH_PREFIX}{path}"
+    if not (os.path.isdir(path)):
         try:
             os.makedirs(path)
         except:
