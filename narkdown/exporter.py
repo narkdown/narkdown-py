@@ -5,7 +5,10 @@ from notion.client import NotionClient
 from notion.settings import *
 from .constants import *
 
+
 LOGN_PATH_PREFIX = '\\\\?\\'
+
+
 class NotionExporter:
     def __init__(
         self,
