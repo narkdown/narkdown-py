@@ -19,7 +19,7 @@ install_requires = get_requirements("requirements.txt")
 
 setuptools.setup(
     name="narkdown",
-    version="1.2.9",
+    version="1.3.0",
     author="younho9",
     author_email="younho9.choo@gmail.com",
     description="A tool to use Notion as a Markdown editor.",
