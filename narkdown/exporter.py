@@ -16,7 +16,7 @@ class NotionExporter:
         recursive_export=True,
         create_page_directory=True,
         add_metadata=False,
-        append_created_time=True,
+        append_created_time=False,
     ):
         """Initialization of Notion Exporter
 
@@ -47,7 +47,7 @@ class NotionExporter:
 
         append_created_time : boolean, optional
             Whether or not to append created time to filename.
-            Defaults to True
+            Defaults to False
         """
         self.token = token
         self.client = NotionClient(token_v2=token)
