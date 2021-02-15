@@ -1,11 +1,13 @@
 ---
 icon: 🧪
-cover: ./images/2020-11-17-basic-blocks-cover.png
+cover: ./images/2020-11-17-basic-blocks-cover-0.jpg
+slug: basic-blocks
 name: Basic Blocks
 status: 🖨 Published
 category: Test
-tags: ["Support"]
+tags: ['Support']
 created_time: 2020-11-17
+slug: hello
 ---
 
 > ⚠️ [Narkdown](https://github.com/younho9/narkdown) is a tool to use Notion as a Markdown editor.

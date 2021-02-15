@@ -1,6 +1,7 @@
 ---
 icon: 🗄️
 cover: ./images/2020-09-16-table-blocks-cover.png
+slug: table-blocks
 name: Table Blocks
 status: 🖨 Published
 category: Test

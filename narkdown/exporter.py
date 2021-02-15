@@ -17,6 +17,7 @@ class NotionExporter:
         create_page_directory=True,
         add_metadata=False,
         append_created_time=False,
+        generate_slug=False,
     ):
         """Initialization of Notion Exporter
 
@@ -56,6 +57,7 @@ class NotionExporter:
         self.create_page_directory = create_page_directory
         self.add_metadata = add_metadata
         self.append_created_time = append_created_time
+        self.generate_slug = generate_slug
 
     def get_notion_page(
         self,
@@ -420,6 +422,8 @@ class NotionExporter:
                 metadata.append(f"icon: {page.icon}")
         if page.cover:
             metadata.append(f"cover: {self.get_image_path(path, page.cover, 'cover')}")
+        if self.generate_slug:
+            metadata.append(f"slug: {replace_path(page.title)}")
         if database:
             ordered_properties = get_ordered_properties(database)
             prop_map = map(

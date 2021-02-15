@@ -1,5 +1,6 @@
 ---
 icon: 📸
+slug: recursive-embed-image
 name: Recursive embed Image
 status: 🖨 Published
 category: Test

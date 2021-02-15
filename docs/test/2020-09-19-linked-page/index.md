@@ -1,6 +1,7 @@
 ---
 icon: 🔗
 cover: ./images/2020-09-19-linked-page-cover.jpg
+slug: linked-page
 name: Linked Page
 status: 🖨 Published
 category: Test
