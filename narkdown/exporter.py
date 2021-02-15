@@ -361,11 +361,12 @@ class NotionExporter:
         contents : str
             Markdown contents
         """
+        ordered_properties = get_ordered_properties(table)
 
         columns = list(
             map(
                 lambda i: {"id": i["id"], "name": i["name"], "type": i["type"]},
-                table.get_schema_properties(),
+                ordered_properties,
             )
         )
 
@@ -406,20 +407,22 @@ class NotionExporter:
 
         metadata = []
 
-        if page.title:
+        if database:
+            ordered_properties = get_ordered_properties(database)
+
+            prop_map = map(
+                partial(property_to_str, page),
+                ordered_properties,
+            )
+            props = list(filter(lambda s: len(s) != 0, prop_map))
+
+            return metadata + props
+        elif page.title:
             metadata.append(f"title: {page.title}")
         if page.icon:
             metadata.append(f"icon: {page.icon}")
         if page.cover:
             metadata.append(f"cover: {self.get_image_path(path, page.cover)}")
-        if database:
-            prop_map = map(
-                partial(property_to_str, page),
-                database.get_schema_properties(),
-            )
-            props = list(filter(lambda s: len(s) != 0, prop_map))
-
-            return metadata + props
 
         return metadata
 

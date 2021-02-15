@@ -90,7 +90,7 @@ def property_to_str(page, prop):
         return ""
 
     if prop_type == "title":
-        return ""
+        return f"{prop_slug}: {prop_value}"
     if prop_type in ["created_time", "last_edited_time"]:
         return f"{prop_slug}: {prop_value.strftime('%Y-%m-%d')}"
     if prop_type in ["created_by", "last_edited_by"]:
@@ -157,3 +157,18 @@ def append_metadata(add_metadata, metadata, page):
         return metadata_str
     else:
         return f"# {page.title}\n\n"
+
+
+def get_ordered_properties(database):
+    cv = database._get_a_collection_view()
+    tp = cv.get("format.table_properties")
+    sp = database.get_schema_properties()
+
+    properties = []
+
+    for tp_item in tp:
+        properties += list(
+            filter(lambda sp_item: sp_item["id"] == tp_item["property"], sp)
+        )
+
+    return properties
