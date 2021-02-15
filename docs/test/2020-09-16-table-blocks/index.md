@@ -1,17 +1,23 @@
-# Table Blocks
+---
+name: Table Blocks
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-09-16
+---
 
 ## Simple Table
 
-| Markdown Syntax   | Output                                         | Support         | Example                                     | Keyboard shortcut in Notion | Style                  |
-| ----------------- | ---------------------------------------------- | --------------- | ------------------------------------------- | --------------------------- | ---------------------- |
-| `** ** or __ __`  | **This is bold text**                          | ['Support']     | **This is bold text**                       | `Cmd/Ctrl` + `B`            | Bold                   |
-| `* * or _ _`      | _This text is italicized_                      | ['Support']     | _This text is italicized_                   | `Cmd/Ctrl` + `I`            | Italic                 |
-| `~~ ~~`           | ~~This was mistaken text~~                     | ['Support']     | ~~This was mistaken text~~                  | `Cmd/Ctrl` + `Shfit` + `S`  | Strikethrough          |
-| `** ** and _ _`   | **This text is** **_extremely_** **important** | ['Support']     | **This text is _extremely_ important**      |                             | Bold and nested italic |
-| `**_ _**`         | **_All this text is important_**               | ['Support']     | **_All this text is important_**            |                             | All bold and italic    |
-| `~~**_ _**~~`     | ~~**_This text is mixed_**~~                   | ['Support']     | ~~**_This text is mixed_**~~                |                             | mixed                  |
-| ``                | `console.log('hello');`                        | ['Support']     | `console.log('hello');`                     | `Cmd/Ctrl` + `E`            | Inline Code            |
-| `[alt text](url)` | [this text is link](https://bit.ly/33x1vN5)    | ['Support']     | [this text is link](https://bit.ly/33x1vN5) | `Cmd/Ctrl` + `K`            | Link                   |
-|                   | This text has underline                        | ['Not Support'] | This text has underline                     | `Cmd/Ctrl` + `U`            | Underline              |
-|                   | This text has color                            | ['Not Support'] | This text has color                         | `Cmd/Ctrl` + `Shfit` + `H`  | Color                  |
-|                   | This text has background color                 | ['Not Support'] | This text has background color              | `Cmd/Ctrl` + `Shfit` + `H`  | Background Color       |
+| Style                  | Keyboard shortcut in Notion | Markdown Syntax   | Example                                     | Output                                         | Support         |
+| ---------------------- | --------------------------- | ----------------- | ------------------------------------------- | ---------------------------------------------- | --------------- |
+| Bold                   | `Cmd/Ctrl` + `B`            | `** ** or __ __`  | **This is bold text**                       | **This is bold text**                          | ['Support']     |
+| Italic                 | `Cmd/Ctrl` + `I`            | `* * or _ _`      | _This text is italicized_                   | _This text is italicized_                      | ['Support']     |
+| Strikethrough          | `Cmd/Ctrl` + `Shfit` + `S`  | `~~ ~~`           | ~~This was mistaken text~~                  | ~~This was mistaken text~~                     | ['Support']     |
+| Bold and nested italic |                             | `** ** and _ _`   | **This text is _extremely_ important**      | **This text is** **_extremely_** **important** | ['Support']     |
+| All bold and italic    |                             | `**_ _**`         | **_All this text is important_**            | **_All this text is important_**               | ['Support']     |
+| mixed                  |                             | `~~**_ _**~~`     | ~~**_This text is mixed_**~~                | ~~**_This text is mixed_**~~                   | ['Support']     |
+| Inline Code            | `Cmd/Ctrl` + `E`            | ``                | `console.log('hello');`                     | `console.log('hello');`                        | ['Support']     |
+| Link                   | `Cmd/Ctrl` + `K`            | `[alt text](url)` | [this text is link](https://bit.ly/33x1vN5) | [this text is link](https://bit.ly/33x1vN5)    | ['Support']     |
+| Underline              | `Cmd/Ctrl` + `U`            |                   | This text has underline                     | This text has underline                        | ['Not Support'] |
+| Color                  | `Cmd/Ctrl` + `Shfit` + `H`  |                   | This text has color                         | This text has color                            | ['Not Support'] |
+| Background Color       | `Cmd/Ctrl` + `Shfit` + `H`  |                   | This text has background color              | This text has background color                 | ['Not Support'] |

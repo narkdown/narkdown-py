@@ -1,4 +1,7 @@
-# Child Page
+---
+title: Child Page
+icon: 🧒
+---
 
 ## Hello! I'm child page.
 

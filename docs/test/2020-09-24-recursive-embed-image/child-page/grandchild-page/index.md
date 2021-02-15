@@ -1,4 +1,7 @@
-# GrandChild Page
+---
+title: GrandChild Page
+icon: 👶
+---
 
 ## Image `Support`
 

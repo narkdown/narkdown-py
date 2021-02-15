@@ -2,7 +2,7 @@
   "exportConfig": {
     "recursiveExport": true,
     "createPageDirectory": true,
-    "addMetadata": false,
+    "addMetadata": true,
     "appendCreatedTime": true
   },
   "databaseConfig": {

@@ -1,4 +1,10 @@
-# Copy of Basic Blocks
+---
+name: Copy of Basic Blocks
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-11-17
+---
 
 > ⚠️ [Narkdown](https://github.com/younho9/narkdown) is a tool to use Notion as a Markdown editor.
 > So [Narkdown](https://github.com/younho9/narkdown) Does not support all features that Notion has.

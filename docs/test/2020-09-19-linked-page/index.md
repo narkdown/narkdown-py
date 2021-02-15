@@ -1,4 +1,10 @@
-# Linked Page
+---
+name: Linked Page
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-09-19
+---
 
 ## Linked page
 

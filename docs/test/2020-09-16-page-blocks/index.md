@@ -1,4 +1,10 @@
-# Page Blocks
+---
+name: Page Blocks
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-09-16
+---
 
 ## Page `Support`
 

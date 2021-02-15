@@ -1,4 +1,10 @@
-# Metadata
+---
+name: Metadata
+status: 🖨 Published
+category: Test
+tags: ["hello", "bye"]
+created_time: 2020-11-18
+---
 
 ## Date to filename
 
