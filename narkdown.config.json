@@ -1,16 +1,12 @@
 {
   "exportConfig": {
     "recursiveExport": true,
-    "createPageDirectory": false,
-    "addMetadata": true,
-    "lowerPathname": true,
-    "lowerFilename": true,
-    "lineBreak": false
+    "createPageDirectory": true,
+    "addMetadata": false,
+    "appendCreatedTime": true
   },
   "databaseConfig": {
     "categoryColumnName": "Category",
-    "tagsColumnName": "Tags",
-    "createdTimeColumnName": "Created Time",
     "statusColumnName": "Status",
     "currentStatus": "✅ Completed",
     "nextStatus": "🖨 Published"

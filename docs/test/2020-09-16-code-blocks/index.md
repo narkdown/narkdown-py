@@ -1,7 +1,4 @@
----
-id: 2020-09-16-code-blocks
-title: "Code Blocks"
----
+# Code Blocks
 
 ## Code `Support`
 

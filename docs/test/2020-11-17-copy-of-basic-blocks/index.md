@@ -1,7 +1,4 @@
----
-id: 2020-11-17-copy-of-basic-blocks
-title: "Copy of Basic Blocks"
----
+# Copy of Basic Blocks
 
 > ⚠️ [Narkdown](https://github.com/younho9/narkdown) is a tool to use Notion as a Markdown editor.
 > So [Narkdown](https://github.com/younho9/narkdown) Does not support all features that Notion has.
@@ -24,6 +21,8 @@ title: "Copy of Basic Blocks"
 ### Divider after the other
 
 ---
+
+<br />
 
 ## Text `Support`
 
@@ -59,6 +58,8 @@ This text has background color. `Not Support`
 
 > ✅ This is an example quote. **Quote block with emoji is same with callout block.**
 
+<br />
+
 ## Bulleted list `Support`
 
 > 🎉 [Narkdown](https://github.com/younho9/narkdown) support nested block.
@@ -78,6 +79,8 @@ This text has background color. `Not Support`
   - Bullet item 2-1
 
   - Bullet item 2-2
+
+<br />
 
 ## Numbered list `Support`
 
@@ -99,6 +102,8 @@ This text has background color. `Not Support`
 
    1. Numbered item 2-2
 
+<br />
+
 ## To-do list `Support`
 
 > 🎉 [Narkdown](https://github.com/younho9/narkdown) support nested block.
@@ -118,6 +123,8 @@ This text has background color. `Not Support`
   - [ ] To-do item 2-1
 
   - [ ] To-do item 2-2
+
+<br />
 
 ## Toggle list `Support`
 

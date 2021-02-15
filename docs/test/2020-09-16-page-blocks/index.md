@@ -1,13 +1,12 @@
----
-id: 2020-09-16-page-blocks
-title: "Page Blocks"
----
+# Page Blocks
 
 ## Page `Support`
 
 > ☝ Create a child page folder in the current location and import the child page. This happens recursively.
 
-[Child Page](Child-Page/Child-Page.md)
+[Child Page](child-page/index.md)
+
+<br />
 
 ## Linked Page `Support`
 
