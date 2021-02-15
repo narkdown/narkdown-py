@@ -238,7 +238,7 @@ class NotionExporter:
 
                     self.get_notion_page(block.get_browseable_url(), sub_path=path)
 
-                    child_title = replace_path(block.title)
+                    child_title = replace_filename(block.title)
 
                     if self.create_page_directory:
                         contents += f"[{block.title}]({child_title}/index.md)"
@@ -427,7 +427,7 @@ class NotionExporter:
         if page.cover:
             metadata.append(f"cover: {self.get_image_path(path, page.cover, 'cover')}")
         if self.generate_slug:
-            metadata.append(f"slug: '{replace_path(page.title)}'")
+            metadata.append(f"slug: '{replace_filename(page.title)}'")
         if database:
             ordered_properties = get_ordered_properties(database)
             prop_map = map(
@@ -437,7 +437,7 @@ class NotionExporter:
             props = list(filter(lambda s: len(s) != 0, prop_map))
             return metadata + props
         if page.title:
-            metadata.append(f"title: {page.title}")
+            metadata.append(f"title: '{page.title}'")
 
         return metadata
 

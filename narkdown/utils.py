@@ -53,6 +53,10 @@ def inputWithDefault(message, default):
         return value
 
 
+def replace_filename(filename):
+    return strip_dash(remove_dup_dash(remove_slash(remove_special(filename)))).lower()
+
+
 def replace_path(pathname):
     return strip_dash(remove_dup_dash(remove_special(pathname))).lower()
 
@@ -65,6 +69,10 @@ def remove_special(string):
     return re.sub(
         r"[\~\`\;\:\'\"\!\@\#\$\%\^\&\*\(\)\-\_\+\=\<\>\{\}\[\]\,\. ]", "-", string
     )
+
+
+def remove_slash(string):
+    return re.sub(r"[\/]", "-", string)
 
 
 def strip_dash(string):
@@ -90,7 +98,7 @@ def property_to_str(page, prop):
         return ""
 
     if prop_type == "title":
-        return f"{prop_slug}: {prop_value}"
+        return f"{prop_slug}: '{prop_value}'"
     if prop_type in ["created_time", "last_edited_time"]:
         return f"{prop_slug}: {prop_value.strftime('%Y-%m-%d')}"
     if prop_type in ["created_by", "last_edited_by"]:
@@ -128,7 +136,7 @@ def get_created_time(page, database):
 
 def get_filename(append_created_time, page, database):
     created_time = get_created_time(page, database)
-    title = replace_path(page.title)
+    title = replace_filename(page.title)
 
     if not created_time:
         return title
