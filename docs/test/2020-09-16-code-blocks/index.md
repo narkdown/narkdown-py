@@ -1,6 +1,11 @@
 ---
-id: 2020-09-16-code-blocks
-title: "Code Blocks"
+icon: 👨‍💻
+cover: ./images/2020-09-16-code-blocks-cover.png
+name: Code Blocks
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-09-16
 ---
 
 ## Code `Support`

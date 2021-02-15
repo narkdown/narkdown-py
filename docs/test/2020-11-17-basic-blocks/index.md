@@ -1,6 +1,11 @@
 ---
-id: 2020-11-17-basic-blocks
-title: "Basic Blocks"
+icon: 🧪
+cover: ./images/2020-11-17-basic-blocks-cover.png
+name: Basic Blocks
+status: 🖨 Published
+category: Test
+tags: ["Support"]
+created_time: 2020-11-17
 ---
 
 > ⚠️ [Narkdown](https://github.com/younho9/narkdown) is a tool to use Notion as a Markdown editor.
@@ -24,6 +29,8 @@ title: "Basic Blocks"
 ### Divider after the other
 
 ---
+
+<br />
 
 ## Text `Support`
 
@@ -59,6 +66,8 @@ This text has background color. `Not Support`
 
 > ✅ This is an example quote. **Quote block with emoji is same with callout block.**
 
+<br />
+
 ## Bulleted list `Support`
 
 > 🎉 [Narkdown](https://github.com/younho9/narkdown) support nested block.
@@ -78,6 +87,8 @@ This text has background color. `Not Support`
   - Bullet item 2-1
 
   - Bullet item 2-2
+
+<br />
 
 ## Numbered list `Support`
 
@@ -99,6 +110,8 @@ This text has background color. `Not Support`
 
    1. Numbered item 2-2
 
+<br />
+
 ## To-do list `Support`
 
 > 🎉 [Narkdown](https://github.com/younho9/narkdown) support nested block.
@@ -118,6 +131,8 @@ This text has background color. `Not Support`
   - [ ] To-do item 2-1
 
   - [ ] To-do item 2-2
+
+<br />
 
 ## Toggle list `Support`
 

@@ -1,9 +1,15 @@
 ---
-id: 2020-11-17-layouts
-title: "Layouts"
+icon: 📐
+name: Layouts
+status: 🖨 Published
+category: Test
+tags: ["Not Support"]
+created_time: 2020-11-17
 ---
 
 ### Complex Layouts
+
+<br />
 
       - First Item
 
@@ -41,16 +47,22 @@ title: "Layouts"
 
 
 
-      ![2020-11-17-layouts-image-0](images/2020-11-17-layouts-image-0.jpg)
+      ![2020-11-17-layouts-image-0](./images/2020-11-17-layouts-image-0.jpg)
 
-      ![2020-11-17-layouts-image-1](images/2020-11-17-layouts-image-1.jpg)
-
-
+      ![2020-11-17-layouts-image-1](./images/2020-11-17-layouts-image-1.jpg)
 
 
 
-      ![2020-11-17-layouts-image-2](images/2020-11-17-layouts-image-2.jpg)
+      ![2020-11-17-layouts-image-2](./images/2020-11-17-layouts-image-2.jpg)
 
       #### Nesting works just fine.
 
       It is also responsive.
+
+      <br />
+
+```javascript
+// this is javascript code
+```
+
+<br />
