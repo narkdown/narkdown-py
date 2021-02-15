@@ -102,19 +102,19 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 
 | Name                  | Description                                                                                       | Default   |
 | --------------------- | ------------------------------------------------------------------------------------------------- | --------- |
-| `recursiveExport`     | Whether or not to recursively export child page.                                                  | ['true']  |
-| `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.                           | ['true']  |
-| `addMetadata`         | Whether or not to add metadata to content.                                                        | ['false'] |
-| `a`ppendCreatedTime   | Whether or not to append created time to filename. ( The page must have a created time property.) | ['false'] |
+| `recursiveExport`     | Whether or not to recursively export child page.                                                  | [`true`]  |
+| `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.                           | [`true`]  |
+| `addMetadata`         | Whether or not to add metadata to content.                                                        | [`false`] |
+| `a`ppendCreatedTime   | Whether or not to append created time to filename. ( The page must have a created time property.) | [`false`] |
 
 <br />
 
 | Name                 | Description                                                                                                                                                                                                                                                                                                                       | Default |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `categoryColumnName` | In Notion database, content can be classified by category by `select` property. When you create the `select` property in the Notion database and pass the name of the column, folders are created by category.                                                                                                                    | ['""']  |
-| `statusColumnName`   | In the Notion database, you can manage the status of content with `Select` property. If you create a `Select` property in the Notion database and pass the name of the column, you can import contents in a specific state or change the status of the content. (should be used with the `currentStatus` or `nextStatus` option.) | ['""']  |
-| `currentStatus`      | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | ['""']  |
-| `nextStatus`         | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | ['""']  |
+| `categoryColumnName` | In Notion database, content can be classified by category by `select` property. When you create the `select` property in the Notion database and pass the name of the column, folders are created by category.                                                                                                                    | [`""`]  |
+| `statusColumnName`   | In the Notion database, you can manage the status of content with `Select` property. If you create a `Select` property in the Notion database and pass the name of the column, you can import contents in a specific state or change the status of the content. (should be used with the `currentStatus` or `nextStatus` option.) | [`""`]  |
+| `currentStatus`      | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | [`""`]  |
+| `nextStatus`         | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | [`""`]  |
 
 #### Set env variable for `token_v2`
 
