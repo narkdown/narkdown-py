@@ -1,6 +1,6 @@
 ---
 icon: 📐
-slug: layouts
+slug: "layouts"
 name: Layouts
 status: 🖨 Published
 category: Test

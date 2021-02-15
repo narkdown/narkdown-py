@@ -1,5 +1,6 @@
 ---
 icon: 👶
+slug: "grandchild-page"
 title: GrandChild Page
 ---
 

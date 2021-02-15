@@ -1,6 +1,6 @@
 ---
 icon: 📄
-slug: example-pages
+slug: "example-pages"
 name: Example Pages
 status: 🖨 Published
 category: Example

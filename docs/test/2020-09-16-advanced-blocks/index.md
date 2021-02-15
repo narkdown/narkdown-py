@@ -1,7 +1,7 @@
 ---
 icon: ↗️
 cover: ./images/2020-09-16-advanced-blocks-cover.png
-slug: advanced-blocks
+slug: "advanced-blocks"
 name: Advanced Blocks
 status: 🖨 Published
 category: Test

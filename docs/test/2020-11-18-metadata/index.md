@@ -1,6 +1,6 @@
 ---
 icon: ℹ️
-slug: metadata
+slug: "metadata"
 name: Metadata
 status: 🖨 Published
 category: Test

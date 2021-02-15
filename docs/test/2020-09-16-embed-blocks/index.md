@@ -1,7 +1,7 @@
 ---
 icon: 📎
 cover: ./images/2020-09-16-embed-blocks-cover.png
-slug: embed-blocks
+slug: "embed-blocks"
 name: Embed Blocks
 status: 🖨 Published
 category: Test

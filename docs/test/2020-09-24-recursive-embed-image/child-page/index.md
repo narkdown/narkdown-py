@@ -1,5 +1,6 @@
 ---
 icon: 🧒
+slug: "child-page"
 title: Child Page
 ---
 

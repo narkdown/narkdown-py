@@ -427,7 +427,7 @@ class NotionExporter:
         if page.cover:
             metadata.append(f"cover: {self.get_image_path(path, page.cover, 'cover')}")
         if self.generate_slug:
-            metadata.append(f"slug: {replace_path(page.title)}")
+            metadata.append(f"slug: '{replace_path(page.title)}'")
         if database:
             ordered_properties = get_ordered_properties(database)
             prop_map = map(
