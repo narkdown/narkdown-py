@@ -86,15 +86,11 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
   "exportConfig": {
     "recursiveExport": true,
     "createPageDirectory": true,
-    "addMetadata": false,
-    "lowerPathname": false,
-    "lowerFilename": false,
-    "lineBreak": false
+    "addMetadata": true,
+    "appendCreatedTime": true
   },
   "databaseConfig": {
     "categoryColumnName": "Category",
-    "tagsColumnName": "Tags",
-    "createdTimeColumnName": "Created Time",
     "statusColumnName": "Status",
     "currentStatus": "✅ Completed",
     "nextStatus": "🖨 Published"
@@ -102,29 +98,25 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 }
 ```
 
-### Export Config
+<br />
 
-| Name                  | Description                                                                      | Default |
-| --------------------- | -------------------------------------------------------------------------------- | ------- |
-| `recursiveExport`     | Whether or not to recursively export child page.                                 | `true`  |
-| `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.          | `true`  |
-| `addMetadata`         | Whether or not to add metadata to content.                                       | `false` |
-| `lowerPathname`       | Whether or not to make pathname to lowercase.                                    | `false` |
-| `lowerFilename`       | Whether or not to make filename to lowercase.                                    | `false` |
-| `lineBreak`           | Whether or not to convert empty blocks of notion to line break tag. ( `<br />` ) | `false` |
+| Name                  | Description                                                                                       | Default   |
+| --------------------- | ------------------------------------------------------------------------------------------------- | --------- |
+| `recursiveExport`     | Whether or not to recursively export child page.                                                  | ['true']  |
+| `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.                           | ['true']  |
+| `addMetadata`         | Whether or not to add metadata to content.                                                        | ['false'] |
+| `a`ppendCreatedTime   | Whether or not to append created time to filename. ( The page must have a created time property.) | ['false'] |
 
-### Database Config
+<br />
 
-| Name                    | Description                                                                                                                                                                                                                                                                                                                       | Default |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `categoryColumnName`    | In Notion database, content can be classified by category by `select` property. When you create the `select` property in the Notion database and pass the name of the column, folders are created by category.                                                                                                                    | `""`    |
-| `tagsColumnName`        | In the Notion database, you can tag content with `Multi Select` property. If you create a `Multi Select` property in the Notion database and pass the name of the column, then meta data will be insterted to contents. (should set `addMetadata` to True.)                                                                       | `""`    |
-| `createdTimeColumnName` | In the Notion database, you can manage created time of content with `Created Time` property. If you create a `Created Time` property in the Notion database and pass the name of the column, you can add created time to filename. (e.g. `2020-12-02-some-title.md` )                                                             | `""`    |
-| `statusColumnName`      | In the Notion database, you can manage the status of content with `Select` property. If you create a `Select` property in the Notion database and pass the name of the column, you can import contents in a specific state or change the status of the content. (should be used with the `currentStatus` or `nextStatus` option.) | `""`    |
-| `currentStatus`         | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | `""`    |
-| `nextStatus`            | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | `""`    |
+| Name                 | Description                                                                                                                                                                                                                                                                                                                       | Default |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `categoryColumnName` | In Notion database, content can be classified by category by `select` property. When you create the `select` property in the Notion database and pass the name of the column, folders are created by category.                                                                                                                    | ['""']  |
+| `statusColumnName`   | In the Notion database, you can manage the status of content with `Select` property. If you create a `Select` property in the Notion database and pass the name of the column, you can import contents in a specific state or change the status of the content. (should be used with the `currentStatus` or `nextStatus` option.) | ['""']  |
+| `currentStatus`      | Import only the content that corresponds to `currentStatus` value. ( `statusColumnName` must be set.)                                                                                                                                                                                                                             | ['""']  |
+| `nextStatus`         | Changes content status to `nextStatus` value after import. ( `statusColumnName` must be set.)                                                                                                                                                                                                                                     | ['""']  |
 
-### Set env variable for `token_v2`
+#### Set env variable for `token_v2`
 
 The `token_v2` of notion is a variable that should not be shared. You can use os environment variable for notion token.
 
@@ -138,30 +130,30 @@ Github action to synchronize the content of the notion database with github.
 
 ## Supported Blocks
 
-| Block Type           | Supported  | Notes                                                                                           |
-| -------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
-| Heading 1            | ✅ Yes     | [Converted to heading 2 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
-| Heading 2            | ✅ Yes     | [Converted to heading 3 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
-| Heading 3            | ✅ Yes     | [Converted to heading 4 in markdown.](https://www.notion.so/11acfd542ee84640b3fb1782ce9b8caa)   |
-| Text                 | ✅ Yes     |                                                                                                 |
-| Divider              | ✅ Yes     | Divider after the Heading 1 is not added.                                                       |
-| Callout              | ✅ Yes     | Callout block will be exported as quote block with emoji.                                       |
-| Quote                | ✅ Yes     |                                                                                                 |
-| Bulleted list        | ✅ Yes     | Support nested block.                                                                           |
-| Numbered list        | ✅ Yes     | Support nested block.                                                                           |
-| To-do list           | ✅ Yes     | Support nested block.                                                                           |
-| Toggle list          | ✅ Yes     | Support nested block.                                                                           |
-| Code                 | ✅ Yes     | Support syntax highlighting.                                                                    |
-| Image                | ✅ Yes     | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
-| Web bookmark         | ✅ Yes     | Same as link text.                                                                              |
-| Page                 | ✅ Yes     | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
-| Table (aka database) | ⚠️ Partial | ⚠️ The sequence of columns is not guaranteed.                                                   |
-| Video                | ❌ No      |                                                                                                 |
-| Audio                | ❌ No      |                                                                                                 |
-| File                 | ❌ No      |                                                                                                 |
-| Embed other services | ❌ No      |                                                                                                 |
-| Advanced             | ❌ No      |                                                                                                 |
-| Layout in page       | ❌ No      |                                                                                                 |
+| Block Type           | Supported | Notes                                                                                           |
+| -------------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| Heading 1            | ✅ Yes    | [Converted to heading 2 in markdown.](https://www.notion.so//11acfd542ee84640b3fb1782ce9b8caa)  |
+| Heading 2            | ✅ Yes    | [Converted to heading 3 in markdown.](https://www.notion.so//11acfd542ee84640b3fb1782ce9b8caa)  |
+| Heading 3            | ✅ Yes    | [Converted to heading 4 in markdown.](https://www.notion.so//11acfd542ee84640b3fb1782ce9b8caa)  |
+| Text                 | ✅ Yes    |                                                                                                 |
+| Divider              | ✅ Yes    | Divider after the Heading 1 is not added.                                                       |
+| Callout              | ✅ Yes    | Callout block will be exported as quote block with emoji.                                       |
+| Quote                | ✅ Yes    |                                                                                                 |
+| Bulleted list        | ✅ Yes    | Support nested block.                                                                           |
+| Numbered list        | ✅ Yes    | Support nested block.                                                                           |
+| To-do list           | ✅ Yes    | Support nested block.                                                                           |
+| Toggle list          | ✅ Yes    | Support nested block.                                                                           |
+| Code                 | ✅ Yes    | Support syntax highlighting.                                                                    |
+| Image                | ✅ Yes    | Uploaded image will be downloaded to local. Linked image will be linked not be downloaded.      |
+| Web bookmark         | ✅ Yes    | Same as link text.                                                                              |
+| Page                 | ✅ Yes    | Import "Child page" in Notion page recursively. And import "Linked page" as a Notion page link. |
+| Table (aka database) | ✅ Yes    |                                                                                                 |
+| Video                | ❌ No     |                                                                                                 |
+| Audio                | ❌ No     |                                                                                                 |
+| File                 | ❌ No     |                                                                                                 |
+| Embed other services | ❌ No     |                                                                                                 |
+| Advanced             | ❌ No     |                                                                                                 |
+| Layout in page       | ❌ No     |                                                                                                 |
 
 ### License
 
