@@ -87,7 +87,8 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
     "recursiveExport": true,
     "createPageDirectory": true,
     "addMetadata": true,
-    "appendCreatedTime": true
+    "appendCreatedTime": true,
+    "generateSlug": true
   },
   "databaseConfig": {
     "categoryColumnName": "Category",
@@ -105,7 +106,8 @@ Create `narkdown.config.json` and run `python3 -m narkdown` in that directory.
 | `recursiveExport`     | Whether or not to recursively export child page.                                                  | [`true`]  |
 | `createPageDirectory` | Whether or not to create subdirectories with page titles for each page.                           | [`true`]  |
 | `addMetadata`         | Whether or not to add metadata to content.                                                        | [`false`] |
-| `a`ppendCreatedTime   | Whether or not to append created time to filename. ( The page must have a created time property.) | [`false`] |
+| `appendCreatedTime`   | Whether or not to append created time to filename. ( The page must have a created time property.) | [`false`] |
+| `generateSlug`        | Whether or not to generate and append slug to metatdata.                                          | [`false`] |
 
 <br />
 

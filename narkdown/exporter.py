@@ -49,6 +49,10 @@ class NotionExporter:
         append_created_time : boolean, optional
             Whether or not to append created time to filename.
             Defaults to False
+
+        generate_slug : boolean, optional
+            Whether or not to generate and append slug to metatdata.
+            Defaults to False
         """
         self.token = token
         self.client = NotionClient(token_v2=token)

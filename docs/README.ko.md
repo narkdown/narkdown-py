@@ -87,7 +87,8 @@ Narkdown은 문서들을 어떻게 추출할 것인지에 대해 몇가지 환�
     "recursiveExport": true,
     "createPageDirectory": true,
     "addMetadata": true,
-    "appendCreatedTime": true
+    "appendCreatedTime": true,
+    "generateSlug": true
   },
   "databaseConfig": {
     "categoryColumnName": "Category",
@@ -105,7 +106,8 @@ Narkdown은 문서들을 어떻게 추출할 것인지에 대해 몇가지 환�
 | `recursiveExport`     | 하위 페이지를 재귀적으로 추출할 것인지 여부                                      | [`true`]  |
 | `createPageDirectory` | 페이지마다 페이지 제목으로 하위 디렉토리를 생성할 것인지 여부                    | [`true`]  |
 | `addMetadata`         | 콘텐츠에 메타데이터를 추가할 것인지 여부                                         | [`false`] |
-| `a`ppendCreatedTime   | 파일 이름에 작성 시간을 추가할 것인지 여부 (페이지에 생성일시 속성이 있어야 함.) | [`false`] |
+| `appendCreatedTime`   | 파일 이름에 작성 시간을 추가할 것인지 여부 (페이지에 생성일시 속성이 있어야 함.) | [`false`] |
+| `generateSlug`        | 메타데이터에 slug(url 친화적 문자열)을 생성하고, 추가할 지 여부                  | [`false`] |
 
 <br />
 
