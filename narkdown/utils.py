@@ -161,7 +161,9 @@ def append_metadata(add_metadata, metadata, page):
 
 def get_ordered_properties(database):
     cv = database._get_a_collection_view()
-    tp = cv.get("format.table_properties")
+    tp = filter(
+        lambda tp_item: tp_item["visible"] == True, cv.get("format.table_properties")
+    )
     sp = database.get_schema_properties()
 
     properties = []
