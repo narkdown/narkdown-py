@@ -1,4 +1,6 @@
 ---
+icon: 🗄️
+cover: ./images/2020-09-16-table-blocks-cover.png
 name: Table Blocks
 status: 🖨 Published
 category: Test

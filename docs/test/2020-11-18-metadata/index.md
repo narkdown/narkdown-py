@@ -1,4 +1,5 @@
 ---
+icon: ℹ️
 name: Metadata
 status: 🖨 Published
 category: Test

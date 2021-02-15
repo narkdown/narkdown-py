@@ -1,4 +1,6 @@
 ---
+icon: 📄
+cover: ./images/2020-09-16-page-blocks-cover.png
 name: Page Blocks
 status: 🖨 Published
 category: Test

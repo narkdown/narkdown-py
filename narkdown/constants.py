@@ -1,4 +1,4 @@
-IMAGE_TYPES = ["png", "jpg", "jpeg", "gif"]
+IMAGE_EXTS = ["png", "jpg", "jpeg", "gif"]
 
 CONFIG_FILENAME = "narkdown.config.json"
 

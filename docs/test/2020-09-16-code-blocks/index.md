@@ -1,4 +1,6 @@
 ---
+icon: 👨‍💻
+cover: ./images/2020-09-16-code-blocks-cover.png
 name: Code Blocks
 status: 🖨 Published
 category: Test

@@ -1,6 +1,6 @@
 ---
-title: GrandChild Page
 icon: 👶
+title: GrandChild Page
 ---
 
 ## Hello! I'm grandchild page

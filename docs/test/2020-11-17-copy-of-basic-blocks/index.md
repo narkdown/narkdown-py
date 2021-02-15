@@ -1,4 +1,6 @@
 ---
+icon: 🧪
+cover: ./images/2020-11-17-copy-of-basic-blocks-cover.png
 name: Copy of Basic Blocks
 status: 🖨 Published
 category: Test

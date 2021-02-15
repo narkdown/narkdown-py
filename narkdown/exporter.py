@@ -244,7 +244,7 @@ class NotionExporter:
                 else:
                     contents += f"[{block.title}]({block.get_browseable_url()})"
             elif block.type == "image":
-                image_path = self.get_image_path(path, block.source)
+                image_path = self.get_image_path(path, block.source, "image")
                 contents += (
                     f"![{self.filename}-image-{self.image_number}]({image_path})"
                 )
@@ -292,7 +292,7 @@ class NotionExporter:
 
         return contents
 
-    def get_image_path(self, path, source):
+    def get_image_path(self, path, source, image_type):
         """Get image and return path of image file.
 
         Arguments
@@ -303,6 +303,10 @@ class NotionExporter:
         source : str
             Image source to get.
 
+        image_type : str
+            Image type.
+            ex) icon, cover, image
+
         Returns
         ---------
         image_path or source : str
@@ -311,8 +315,8 @@ class NotionExporter:
         """
         if source.startswith("/"):
             create_directory(os.path.join(self.docs_directory, path, "images"))
-            type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
-            image_path = f"./images/{self.filename}-cover.{type}"
+            type = "".join(filter(lambda i: i in source, IMAGE_EXTS))
+            image_path = f"./images/{self.filename}-{image_type}.{type}"
 
             try:
                 r = requests.get(f"{NOTION_BASE_URL}{source}", allow_redirects=True)
@@ -328,8 +332,10 @@ class NotionExporter:
 
         if source.startswith(S3_URL_PREFIX_ENCODED):
             create_directory(os.path.join(self.docs_directory, path, "images"))
-            type = "".join(filter(lambda i: i in source, IMAGE_TYPES))
-            image_path = f"./images/{self.filename}-image-{self.image_number}.{type}"
+            type = "".join(filter(lambda i: i in source, IMAGE_EXTS))
+            image_path = (
+                f"./images/{self.filename}-{image_type}-{self.image_number}.{type}"
+            )
 
             try:
                 r = requests.get(source, allow_redirects=True)
@@ -407,22 +413,23 @@ class NotionExporter:
 
         metadata = []
 
+        if page.icon:
+            if page.icon.startswith("http"):
+                metadata.append(f"icon: {self.get_image_path(path, page.icon, 'icon')}")
+            else:
+                metadata.append(f"icon: {page.icon}")
+        if page.cover:
+            metadata.append(f"cover: {self.get_image_path(path, page.cover, 'cover')}")
         if database:
             ordered_properties = get_ordered_properties(database)
-
             prop_map = map(
                 partial(property_to_str, page),
                 ordered_properties,
             )
             props = list(filter(lambda s: len(s) != 0, prop_map))
-
             return metadata + props
-        elif page.title:
+        if page.title:
             metadata.append(f"title: {page.title}")
-        if page.icon:
-            metadata.append(f"icon: {page.icon}")
-        if page.cover:
-            metadata.append(f"cover: {self.get_image_path(path, page.cover)}")
 
         return metadata
 

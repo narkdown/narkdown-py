@@ -1,4 +1,6 @@
 ---
+icon: 📎
+cover: ./images/2020-09-16-embed-blocks-cover.png
 name: Embed Blocks
 status: 🖨 Published
 category: Test

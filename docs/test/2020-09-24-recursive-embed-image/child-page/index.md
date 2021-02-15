@@ -1,6 +1,6 @@
 ---
-title: Child Page
 icon: 🧒
+title: Child Page
 ---
 
 ## Image `Support`

@@ -1,4 +1,5 @@
 ---
+icon: 📸
 name: Recursive embed Image
 status: 🖨 Published
 category: Test

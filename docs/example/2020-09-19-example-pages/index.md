@@ -1,4 +1,5 @@
 ---
+icon: 📄
 name: Example Pages
 status: 🖨 Published
 category: Example
