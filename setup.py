@@ -3,20 +3,6 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as f:
     readme = f.read()
 
-
-def get_requirements(fname):
-    "Takes requirements from requirements.txt and returns a list."
-    with open(fname) as fp:
-        reqs = list()
-        for lib in fp.read().split("\n"):
-            # Ignore pypi flags and comments
-            if not lib.startswith("-") or lib.startswith("#"):
-                reqs.append(lib.strip())
-        return reqs
-
-
-install_requires = get_requirements("requirements.txt")
-
 setuptools.setup(
     name="narkdown",
     version="1.3.2",
@@ -26,7 +12,7 @@ setuptools.setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/younho9/narkdown",
-    install_requires=install_requires,
+    dependency_links=['https://github.com/jamalex/notion-py.git@refs/pull/294/merge'],
     include_package_data=True,
     packages=setuptools.find_packages(),
     keywords=["notion", "github", "markdown"],
