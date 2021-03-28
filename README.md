@@ -3,7 +3,7 @@
 # Narkdown
 
 <p align="left">
-  <img alt="PyPI" src="https://img.shields.io/pypi/v/narkdown?style=flat-square">
+  <a href="https://pypi.org/project/narkdown/"><img alt="PyPI" src="https://img.shields.io/pypi/v/narkdown?style=flat-square"></a>
   <img alt="PyPi - Python Version" src="https://img.shields.io/pypi/pyversions/narkdown?style=flat-square">
   <a href="https://github.com/psf/black"><img alt="code style: black" src="https://img.shields.io/static/v1?label=code%20style&message=black&color=black&style=flat-square"></a>
   <img alt="PyPI - License" src="https://img.shields.io/pypi/l/narkdown?style=flat-square">
